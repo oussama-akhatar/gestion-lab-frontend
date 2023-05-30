@@ -20,15 +20,8 @@ export class EtablissementComponent implements OnInit {
 
   public getEtablissements(): void {
     this.etablissementService.getEtablissements().subscribe(
-      (response: Etablissement[]) => {
-        this.etablissements = response;
-        console.log(this.etablissements);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
+      response => this.etablissements = response
     );
   }
-
 
 }

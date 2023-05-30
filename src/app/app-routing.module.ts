@@ -5,7 +5,7 @@ import {NewEtablissementComponent} from "./components/etablissement/new-etabliss
 
 const routes: Routes = [
   { path: 'etablissement', component: EtablissementComponent },
-  { path: 'add-etablissement', component: NewEtablissementComponent }
+  { path: 'addEtablissement', component: NewEtablissementComponent }
 ];
 
 @NgModule({
