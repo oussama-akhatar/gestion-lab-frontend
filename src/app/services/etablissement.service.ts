@@ -16,4 +16,9 @@ export class EtablissementService {
   public getEtablissements(): Observable<Etablissement[]> {
     return this.http.get<Etablissement[]>(`${this.apiServerUrl}/etablissement/all`);
   }
+
+  public addEtablissement(etablissement: Etablissement): Observable<Etablissement> {
+    return this.http.post<Etablissement>(`${this.apiServerUrl}/etablissement/add`, etablissement);
+  }
+
 }

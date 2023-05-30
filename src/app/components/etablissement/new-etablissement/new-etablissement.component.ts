@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EtablissementService} from "../../../services/etablissement.service";
+import {Etablissement} from "../../../models/Etablissement";
 
 @Component({
   selector: 'app-new-etablissement',
@@ -14,8 +15,21 @@ export class NewEtablissementComponent implements OnInit{
 
   ngOnInit(): void {
     this.etablissementForm = this.fb.group({
-      nom : this.fb.control('',[Validators.required]),
+      intitule : this.fb.control('',[Validators.required]),
       adresse : this.fb.control('', [Validators.required])
+    })
+  }
+
+  saveEtablissement() {
+    let etablissement: Etablissement = this.etablissementForm.value;
+    this.etabllissementService.addEtablissement(etablissement).subscribe({
+      next : value => {
+        alert(JSON.stringify(value));
+
+      },
+      error : err => {
+        console.log(err);
+      }
     })
   }
 
