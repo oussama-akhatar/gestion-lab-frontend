@@ -9,7 +9,7 @@ import { Etablissement } from '../models/Etablissement';
 })
 export class EtablissementService {
 
-  private apiServerUrl = environment.apiBaseUrl;
+  private apiServerUrl = "http://localhost:8083";
 
   constructor(private http: HttpClient) { }
 
