@@ -1,0 +1,29 @@
+<div class="card m-5">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h1>Liste des Etablissements</h1>
+    <button class="btn btn-primary" routerLink="/add-etablissement">Ajouter établissement</button>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Intitulé</th>
+          <th scope="col">Adresse</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let etablissement of etablissements">
+          <th scope="row">{{etablissement.id}}</th>
+          <td>{{etablissement.intitule}}</td>
+          <td>{{etablissement.adresse}}</td>
+          <td>
+            <a class="text-success h5" href="#"><i class="bi bi-pen"></i></a>
+            <a class="text-danger h5 ms-2" href="#"><i class="bi bi-trash3"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
