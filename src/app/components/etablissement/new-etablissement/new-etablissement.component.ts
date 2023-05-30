@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EtablissementService} from "../../../services/etablissement.service";
 import {Etablissement} from "../../../models/Etablissement";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-etablissement',
@@ -11,7 +12,7 @@ import {Etablissement} from "../../../models/Etablissement";
 export class NewEtablissementComponent implements OnInit{
   public etablissementForm !: FormGroup;
 
-  constructor(private fb : FormBuilder, private etabllissementService : EtablissementService) {}
+  constructor(private fb : FormBuilder, private etablissementService : EtablissementService, private route: Router) {}
 
   ngOnInit(): void {
     this.etablissementForm = this.fb.group({
@@ -22,10 +23,10 @@ export class NewEtablissementComponent implements OnInit{
 
   saveEtablissement() {
     let etablissement: Etablissement = this.etablissementForm.value;
-    this.etabllissementService.addEtablissement(etablissement).subscribe({
+    this.etablissementService.addEtablissement(etablissement).subscribe({
       next : value => {
-        alert(JSON.stringify(value));
-
+        console.log(value);
+        this.route.navigate(['/etablissement']).then(r => console.log(r));
       },
       error : err => {
         console.log(err);

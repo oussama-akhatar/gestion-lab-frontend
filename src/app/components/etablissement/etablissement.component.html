@@ -19,8 +19,36 @@
           <td>{{etablissement.intitule}}</td>
           <td>{{etablissement.adresse}}</td>
           <td>
-            <a class="text-success h5" href="#"><i class="bi bi-pen"></i></a>
-            <a class="text-danger h5 ms-2" href="#"><i class="bi bi-trash3"></i></a>
+            <a class="text-success h5" href="#{{etablissement.id}}" data-bs-toggle="modal" (click)="loadObjectData(etablissement)" ><i class="bi bi-pen"></i></a>
+            <div class="modal fade" id="{{etablissement.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Etablissement {{etablissement.id}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="etablissementEditForm">
+                      <div class="mb-3 visually-hidden">
+                        <label class="form-label">ID</label>
+                        <input type="text" class="form-control" name="id" value="{{etablissement.id}}" formControlName="id">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Intitule</label>
+                        <input type="text" class="form-control" name="intitule" value="{{etablissement.intitule}}" formControlName="intitule">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Adresse</label>
+                        <input type="text" class="form-control" name="adresse" value="{{etablissement.adresse}}" formControlName="adresse">
+                      </div>
+                      <button type="submit" class="btn btn-success" [disabled]="etablissementEditForm.invalid" (click)="editEtablissement()" data-bs-dismiss="modal">Edit</button>
+                      <a routerLink="/etablissement" class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="text-danger h5 ms-2"  (click)="deleteEtablissement(etablissement)"><i class="bi bi-trash3"></i></a>
           </td>
         </tr>
       </tbody>

@@ -12,7 +12,7 @@
         <label class="form-label">Adresse</label>
         <input type="text" class="form-control" name="adresse" formControlName="adresse">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" [disabled]="etablissementForm.invalid" class="btn btn-primary">Submit</button>
       <a routerLink="/etablissement" class="btn btn-secondary ms-2">Back</a>
     </form>
   </div>
