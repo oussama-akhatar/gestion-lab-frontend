@@ -44,8 +44,7 @@ export class EtablissementComponent implements OnInit {
     const etablissement: Etablissement = {
       id: this.etablissementEditForm.value.id,
       intitule: this.etablissementEditForm.value.intitule,
-      adresse: this.etablissementEditForm.value.adresse,
-      // laboratoires: []
+      adresse: this.etablissementEditForm.value.adresse
     }
     this.etablissementService.editEtablissement(etablissement).subscribe(
       (etablissement1: Etablissement) => {
