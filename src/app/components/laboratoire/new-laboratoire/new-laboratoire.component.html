@@ -3,17 +3,17 @@
         <h1>Ajouter laboratoire</h1>
     </div>
     <div class="card-body">
-        <form [formGroup]="newLabFormGroup" method="POST" (ngSubmit)="saveLaboratoire()">
+        <!-- <form [formGroup]="newLabFormGroup" method="POST" (ngSubmit)="saveLaboratoire()"> -->
             <div class="mb-3">
                 <label class="form-label">Intitule</label>
                 <input type="text" class="form-control" name="intitule" formControlName="intitule">
             </div>
             <div class="mb-3">
                 <label class="form-label">Departement</label>
-                <input type="text" class="form-control" name="adresse" formControlName="departement">
+                <input type="text" class="form-control" name="departement" formControlName="departement">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <a routerLink="/etablissement" class="btn btn-secondary ms-2">Back</a>
-        </form>
+        <!-- </form> -->
     </div>
 </div>

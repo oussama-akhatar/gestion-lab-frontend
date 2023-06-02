@@ -1,4 +1,4 @@
-<div class="card m-5">
+<!-- <div class="card m-5">
     <div class="card-header d-flex align-items-center justify-content-between">
         <h1>Liste des laboratoires</h1>
         <a class="btn btn-primary"  routerLink="/new-laboratoire">Ajouter laboratoire</a>
@@ -26,4 +26,56 @@
             </tbody>
         </table>
     </div>
+</div> -->
+
+
+<h2>Laboratoires</h2>
+
+<!-- Display laboratoires -->
+<div *ngIf="laboratoires" class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Intitule</th>
+                <th>Departement</th>
+                <th>Etablissement</th>
+                <!-- Add additional fields if necessary -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let laboratoire of laboratoires">
+                <td>{{ laboratoire.id }}</td>
+                <td>{{ laboratoire.intitule }}</td>
+                <td>{{ laboratoire.departement }}</td>
+                <td>{{ laboratoire?.etablissement.intitule }}</td>
+                <!-- Display additional fields if necessary -->
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+
+<!-- Add New Laboratoire -->
+<h2>Ajouter un Laboratoire</h2>
+
+<form [formGroup]="newLaboratoireForm" (ngSubmit)="addLaboratoire()">
+    <div class="form-group">
+        <label for="intitule">Intitulé:</label>
+        <input type="text" class="form-control" id="intitule" formControlName="intitule">
+    </div>
+    <div class="form-group">
+        <label for="departement">Département:</label>
+        <input type="text" class="form-control" id="departement" formControlName="departement">
+    </div>
+    <div class="form-group">
+        <label for="etablissement">Etablissement:</label>
+        <select class="form-control" id="etablissement" formControlName="etablissement">
+            <option value="">Choisir Etablissement</option>
+            <option *ngFor="let etablissement of etablissements" [ngValue]="etablissement">
+                {{ etablissement.intitule }}
+            </option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>

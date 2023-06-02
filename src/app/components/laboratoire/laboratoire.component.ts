@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Etablissement } from 'src/app/models/Etablissement';
 import { Laboratoire } from 'src/app/models/Laboratoire';
+import { EtablissementService } from 'src/app/services/etablissement.service';
 import { LaboratoireService } from 'src/app/services/laboratoire.service';
 
 @Component({
@@ -9,23 +12,99 @@ import { LaboratoireService } from 'src/app/services/laboratoire.service';
 })
 export class LaboratoireComponent implements OnInit {
 
-  laboratoires?: Laboratoire[];
-  laboratoire!: Laboratoire;
+  laboratoires: Laboratoire[];
+  etablissements: Etablissement[];
+  newLaboratoireForm: FormGroup;
 
-  constructor(private laboratoireService: LaboratoireService) { }
+  // laboratoire!: Laboratoire;
+
+  constructor(
+    private laboratoireService: LaboratoireService,
+    private etablissementService: EtablissementService,
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit(): void {
-    this.getLaboratoires();
+    this.initForm();
+    this.getAllLaboratoires();
+    this.loadEtablissements();
   }
 
-  getLaboratoires(): void {
-    this.laboratoireService.getAll().subscribe({
-      next: (data) => {
-        this.laboratoires = data;
-        console.log(data);
-      },
-      error: (e) => console.error(e)
+  initForm(): void {
+    this.newLaboratoireForm = this.formBuilder.group({
+      intitule: ['', Validators.required],
+      departement: ['', Validators.required],
+      etablissement: ['', Validators.required]
     });
+  }
+
+  getAllLaboratoires(): void {
+    this.laboratoireService.getAllLaboratoires().subscribe(
+      (laboratoires: Laboratoire[]) => {
+        this.laboratoires = laboratoires;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  loadEtablissements(): void {
+    this.etablissementService.getAllEtablissements().subscribe(
+      (etablissements: Etablissement[]) => {
+        this.etablissements = etablissements;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  addLaboratoire(): void {
+    if (this.newLaboratoireForm.valid) {
+      const laboratoire: Laboratoire = {
+        intitule: this.newLaboratoireForm.value.intitule,
+        departement: this.newLaboratoireForm.value.departement,
+        etablissement: {
+          id: this.newLaboratoireForm.value.etablissement.id,
+          intitule: '',
+          adresse: ''
+        }
+      };
+
+      this.laboratoireService.addLaboratoire(laboratoire).subscribe(
+        (newLaboratoire: Laboratoire) => {
+          console.log('New Laboratoire:', newLaboratoire);
+          // Reset the form
+          this.newLaboratoireForm.reset();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  updateLaboratoire(laboratoire: Laboratoire): void {
+    this.laboratoireService.updateLaboratoire(laboratoire).subscribe(
+      (updatedLaboratoire: Laboratoire) => {
+        // Handle success, if needed
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  deleteLaboratoire(id: number): void {
+    this.laboratoireService.deleteLaboratoire(id).subscribe(
+      () => {
+        // Handle success, if needed
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
 
 }

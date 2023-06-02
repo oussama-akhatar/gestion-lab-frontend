@@ -24,18 +24,18 @@ export class NewLaboratoireComponent implements OnInit {
     });
   }
 
-  saveLaboratoire() {
-    let laboratoire: Laboratoire = this.newLabFormGroup.value;
-    this.laboratoireService.create(laboratoire).subscribe({
-      next: data => {
-        alert("Laboratoire has been successfully saved!");
-        //this.newLabFormGroup.reset();
-        this.router.navigateByUrl("/laboratoires");
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
-  }
+  // saveLaboratoire() {
+  //   let laboratoire: Laboratoire = this.newLabFormGroup.value;
+  //   this.laboratoireService.create(laboratoire).subscribe({
+  //     next: data => {
+  //       // alert("Laboratoire has been successfully saved!");
+  //       //this.newLabFormGroup.reset();
+  //       this.router.navigateByUrl("/laboratoires");
+  //     },
+  //     error: err => {
+  //       console.log(err);
+  //     }
+  //   });
+  // }
 
 }

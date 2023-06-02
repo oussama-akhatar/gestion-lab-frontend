@@ -26,7 +26,7 @@ export class EtablissementComponent implements OnInit {
   }
 
   public getEtablissements(): void {
-    this.etablissementService.getEtablissements().subscribe(
+    this.etablissementService.getAllEtablissements().subscribe(
       response => this.etablissements = response
     );
   }
@@ -45,7 +45,7 @@ export class EtablissementComponent implements OnInit {
       id: this.etablissementEditForm.value.id,
       intitule: this.etablissementEditForm.value.intitule,
       adresse: this.etablissementEditForm.value.adresse,
-      laboratoires: []
+      // laboratoires: []
     }
     this.etablissementService.editEtablissement(etablissement).subscribe(
       (etablissement1: Etablissement) => {
