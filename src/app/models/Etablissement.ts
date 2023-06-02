@@ -1,4 +1,4 @@
-export class Etablissement {
+export interface Etablissement {
   id?: number;
   intitule: string;
   adresse: string;

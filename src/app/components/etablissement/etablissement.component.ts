@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Etablissement } from 'src/app/models/Etablissement';
 import { EtablissementService } from 'src/app/services/etablissement.service';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-etablissement',
@@ -13,8 +14,9 @@ export class EtablissementComponent implements OnInit {
 
   public etablissements : Array<Etablissement> = [];
   public etablissementEditForm !: FormGroup;
+  public etablissementForm !: FormGroup;
 
-  constructor(private fb : FormBuilder, private etablissementService:EtablissementService){ }
+  constructor(private fb : FormBuilder, private etablissementService:EtablissementService, private route: Router){ }
 
   ngOnInit(): void {
     this.getEtablissements();
@@ -22,6 +24,10 @@ export class EtablissementComponent implements OnInit {
       id : this.fb.control(null,[Validators.required]),
       intitule : this.fb.control(null,[Validators.required]),
       adresse : this.fb.control(null, [Validators.required])
+    })
+    this.etablissementForm = this.fb.group({
+      intitule : this.fb.control('',[Validators.required]),
+      adresse : this.fb.control('', [Validators.required])
     })
   }
 
@@ -60,6 +66,19 @@ export class EtablissementComponent implements OnInit {
       intitule : etablissement.intitule,
       adresse: etablissement.adresse
     });
+  }
+
+  saveEtablissement() {
+    let etablissement: Etablissement = this.etablissementForm.value;
+    this.etablissementService.addEtablissement(etablissement).subscribe({
+      next : value => {
+        console.log(value);
+        this.getEtablissements()
+      },
+      error : err => {
+        console.log(err);
+      }
+    })
   }
 
 }

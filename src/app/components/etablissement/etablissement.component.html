@@ -1,13 +1,13 @@
 <div class="card m-5">
   <div class="card-header d-flex align-items-center justify-content-between">
     <h1>Liste des Etablissements</h1>
-    <a class="btn btn-primary" routerLink="/addEtablissement">Ajouter établissement</a>
+    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#etabAdd">Ajouter établissement</a>
   </div>
   <div class="card-body">
-    <table class="table">
+    <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">ID</th>
           <th scope="col">Intitulé</th>
           <th scope="col">Adresse</th>
           <th scope="col">Actions</th>
@@ -53,5 +53,31 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="etabAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="">Ajouter un Laboratoire</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="etablissementForm" method="POST" (ngSubmit)="saveEtablissement()">
+          <div class="mb-3">
+            <label class="form-label">Intitule</label>
+            <input type="text" class="form-control" name="intitule" formControlName="intitule" placeholder="Intitule">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Adresse</label>
+            <input type="text" class="form-control" name="adresse" formControlName="adresse" placeholder="Adresse">
+          </div>
+          <button type="submit" [disabled]="etablissementForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

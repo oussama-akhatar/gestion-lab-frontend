@@ -5,17 +5,13 @@ import { EtablissementComponent } from './components/etablissement/etablissement
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NewEtablissementComponent } from './components/etablissement/new-etablissement/new-etablissement.component';
 import { LaboratoireComponent } from './components/laboratoire/laboratoire.component';
-import { NewLaboratoireComponent } from './components/laboratoire/new-laboratoire/new-laboratoire.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EtablissementComponent,
-    NewEtablissementComponent,
-    LaboratoireComponent,
-    NewLaboratoireComponent
+    LaboratoireComponent
   ],
   imports: [
     BrowserModule,

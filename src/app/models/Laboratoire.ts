@@ -1,6 +1,6 @@
 import { Etablissement } from "./Etablissement";
 
-export class Laboratoire {
+export interface Laboratoire {
   id?: number;
   intitule: string;
   departement: string;
