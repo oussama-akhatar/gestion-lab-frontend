@@ -4,36 +4,36 @@
     <form [formGroup]="newMembreForm" (ngSubmit)="addMembre()">
         <div class="form-group">
             <label for="nom">Nom</label>
-            <input type="text" id="nom" formControlName="nom" class="form-control" required>
+            <input type="text" id="nom" formControlName="nom" class="form-control">
         </div>
         <div class="form-group">
             <label for="prenom">Prenom</label>
-            <input type="text" id="prenom" formControlName="prenom" class="form-control" required>
+            <input type="text" id="prenom" formControlName="prenom" class="form-control">
         </div>
         <div class="form-group">
             <label for="dateNaissance">Date de Naissance</label>
-            <input type="date" id="dateNaissance" formControlName="dateNaissance" class="form-control" required>
+            <input type="date" id="dateNaissance" formControlName="dateNaissance" class="form-control">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" formControlName="email" class="form-control" required>
+            <input type="email" id="email" formControlName="email" class="form-control">
         </div>
         <div class="form-group">
             <label for="telephone">Telephone</label>
-            <input type="text" id="telephone" formControlName="telephone" class="form-control" required>
+            <input type="text" id="telephone" formControlName="telephone" class="form-control">
         </div>
         <div class="form-group">
-            <label for="isDirecteur" class="form-check-label">Directeur</label>
-            <input type="checkbox" id="isDirecteur" formControlName="isDirecteur" class="form-control form-check-input">
+            <label for="directeur" class="form-check-label">Directeur</label>
+            <input type="checkbox" id="directeur" formControlName="directeur" class="form-control form-check-input">
         </div>
         <div class="form-group">
             <label for="laboratoire">Laboratoire</label>
-            <select id="laboratoire" formControlName="laboratoire" class="form-control" required>
+            <select id="laboratoire" formControlName="laboratoire" class="form-control">
                 <option *ngFor="let laboratoire of laboratoires" [ngValue]="laboratoire">
                     {{ laboratoire.intitule }}
                 </option>
             </select>
         </div>
-        <button type="submit"  [disabled]="newMembreForm.invalid" class="btn btn-primary">Add Membre</button>
+        <button type="submit" [disabled]="newMembreForm.invalid" class="btn btn-primary">Add Membre</button>
     </form>
 </div>

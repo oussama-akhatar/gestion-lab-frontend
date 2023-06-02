@@ -7,6 +7,6 @@ export interface Membre {
     dateNaissance: Date;
     email: string;
     telephone: string;
-    isDirecteur: boolean;
+    directeur: boolean;
     laboratoire: Laboratoire;
 }

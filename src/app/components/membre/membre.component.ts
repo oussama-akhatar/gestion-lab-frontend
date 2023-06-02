@@ -28,13 +28,13 @@ export class MembreComponent implements OnInit {
 
   initMembreForm(): void {
     this.newMembreForm = this.formBuilder.group({
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      dateNaissance: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telephone: ['', Validators.required],
-      isDirecteur: [false],
-      laboratoire: ['', Validators.required]
+      nom: [null, Validators.required],
+      prenom: [null, Validators.required],
+      dateNaissance: [new Date(), Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      telephone: [null, Validators.required],
+      directeur: [false, Validators.required],
+      laboratoire: [null, Validators.required]
     });
   }
 
@@ -61,22 +61,22 @@ export class MembreComponent implements OnInit {
       dateNaissance: this.newMembreForm.value.dateNaissance,
       email: this.newMembreForm.value.email,
       telephone: this.newMembreForm.value.telephone,
-      isDirecteur: this.newMembreForm.value.isDirecteur,
+      directeur: this.newMembreForm.value.directeur,
       laboratoire: {
         id: this.newMembreForm.value.laboratoire.id
       }
     };
 
-    this.membreService.addMembre(membreData).subscribe(
-      (membre: Membre) => {
-        console.log('Membre added successfully:', membre);
+    this.membreService.addMembre(membreData).subscribe({
+      next: data => {
+        console.log('Membre added successfully:', membreData);
         // Reset the form
         this.newMembreForm.reset();
       },
-      (error) => {
-        console.log('Error adding membre:', error);
+      error: err => {
+        console.log('Error adding membre:', err);
       }
-    );
+    });
 
   }
 
