@@ -13,7 +13,7 @@ import { MembreService } from 'src/app/services/membre.service';
 export class MembreComponent implements OnInit {
 
   newMembreForm: FormGroup;
-  laboratoires: Laboratoire[];
+  laboratoires: Laboratoire[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -77,7 +77,6 @@ export class MembreComponent implements OnInit {
         console.log('Error adding membre:', err);
       }
     });
-
   }
 
 }
