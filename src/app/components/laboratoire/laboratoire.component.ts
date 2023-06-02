@@ -13,11 +13,10 @@ import { LaboratoireService } from 'src/app/services/laboratoire.service';
 })
 export class LaboratoireComponent implements OnInit {
 
-  laboratoires: Laboratoire[];
+  laboratoires: Laboratoire[] = [];
   etablissements: Etablissement[];
   newLaboratoireForm: FormGroup;
-
-  // laboratoire!: Laboratoire;
+  editLaboratoireForm: FormGroup;
 
   constructor(
     private laboratoireService: LaboratoireService,
@@ -37,6 +36,13 @@ export class LaboratoireComponent implements OnInit {
       departement: ['', Validators.required],
       etablissement: ['', Validators.required]
     });
+
+    this.editLaboratoireForm = this.formBuilder.group({
+      id: ['', Validators.required],
+      intitule: ['', Validators.required],
+      departement: ['', Validators.required],
+      etablissement: ['', Validators.required]
+    })
   }
 
   getAllLaboratoires(): void {
@@ -76,6 +82,7 @@ export class LaboratoireComponent implements OnInit {
           console.log('New Laboratoire:', newLaboratoire);
           // Reset the form
           this.newLaboratoireForm.reset();
+          this.getAllLaboratoires();
         },
         (error) => {
           console.log(error);
@@ -84,10 +91,31 @@ export class LaboratoireComponent implements OnInit {
     }
   }
 
-  updateLaboratoire(laboratoire: Laboratoire): void {
+  public loadObjectData(laboratoire: Laboratoire) {
+    this.editLaboratoireForm.patchValue({
+      id: laboratoire.id,
+      intitule: laboratoire.intitule,
+      departement: laboratoire.departement,
+      etablissement: laboratoire.etablissement
+    });
+  }
+
+  updateLaboratoire(): void {
+    const laboratoire: Laboratoire = {
+      id: this.editLaboratoireForm.value.id,
+      intitule: this.editLaboratoireForm.value.intitule,
+      departement: this.editLaboratoireForm.value.departement,
+      etablissement: {
+        id: this.editLaboratoireForm.value.etablissement.id,
+        intitule: '',
+        adresse: ''
+      }
+    }
     this.laboratoireService.updateLaboratoire(laboratoire).subscribe(
       (updatedLaboratoire: Laboratoire) => {
         // Handle success, if needed
+        this.getAllLaboratoires()
+        console.log(updatedLaboratoire)
       },
       (error: any) => {
         console.error(error);
@@ -96,14 +124,17 @@ export class LaboratoireComponent implements OnInit {
   }
 
   deleteLaboratoire(id: number): void {
-    this.laboratoireService.deleteLaboratoire(id).subscribe(
-      () => {
-        // Handle success, if needed
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
+    if (confirm("Etes vous sure !!"))
+      this.laboratoireService.deleteLaboratoire(id).subscribe(
+        (r) => {
+          // Handle success, if needed
+          console.log(r)
+          this.getAllLaboratoires()
+        },
+        (error: any) => {
+          console.error(error);
+        }
+      );
   }
 
 }

@@ -1,13 +1,13 @@
 <div class="card m-5">
   <div class="card-header d-flex align-items-center justify-content-between">
     <h1>Liste des Etablissements</h1>
-    <a class="btn btn-primary" routerLink="/new-etablissement">Ajouter établissement</a>
+    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#etabAdd">Ajouter établissement</a>
   </div>
   <div class="card-body">
-    <table class="table">
+    <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">ID</th>
           <th scope="col">Intitulé</th>
           <th scope="col">Adresse</th>
           <th scope="col">Actions</th>
@@ -19,8 +19,10 @@
           <td>{{etablissement.intitule}}</td>
           <td>{{etablissement.adresse}}</td>
           <td>
-            <a class="text-success h5" href="#{{etablissement.id}}" data-bs-toggle="modal" (click)="loadObjectData(etablissement)" ><i class="bi bi-pen"></i></a>
-            <div class="modal fade" id="{{etablissement.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <a class="text-success h5" href="#{{etablissement.id}}" data-bs-toggle="modal"
+              (click)="loadObjectData(etablissement)"><i class="bi bi-pen"></i></a>
+            <div class="modal fade" id="{{etablissement.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -28,30 +30,61 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <form [formGroup]="etablissementEditForm">
+                    <form [formGroup]="editEtablissementForm">
                       <div class="mb-3 visually-hidden">
                         <label class="form-label">ID</label>
-                        <input type="text" class="form-control" name="id" value="{{etablissement.id}}" formControlName="id">
+                        <input type="text" class="form-control" name="id" value="{{etablissement.id}}"
+                          formControlName="id">
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Intitule</label>
-                        <input type="text" class="form-control" name="intitule" value="{{etablissement.intitule}}" formControlName="intitule">
+                        <input type="text" class="form-control" name="intitule" value="{{etablissement.intitule}}"
+                          formControlName="intitule">
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Adresse</label>
-                        <input type="text" class="form-control" name="adresse" value="{{etablissement.adresse}}" formControlName="adresse">
+                        <input type="text" class="form-control" name="adresse" value="{{etablissement.adresse}}"
+                          formControlName="adresse">
                       </div>
-                      <button type="submit" class="btn btn-success" [disabled]="etablissementEditForm.invalid" (click)="editEtablissement()" data-bs-dismiss="modal">Edit</button>
+                      <button type="submit" class="btn btn-success" [disabled]="editEtablissementForm.invalid"
+                        (click)="editEtablissement()" data-bs-dismiss="modal">Edit</button>
                       <a routerLink="/etablissement" class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
                     </form>
                   </div>
                 </div>
               </div>
             </div>
-            <a class="text-danger h5 ms-2"  (click)="deleteEtablissement(etablissement)"><i class="bi bi-trash3"></i></a>
+            <a class="text-danger h5 ms-2" (click)="deleteEtablissement(etablissement)"><i class="bi bi-trash3"></i></a>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="etabAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="">Ajouter un Laboratoire</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newEtablissementForm" method="POST" (ngSubmit)="saveEtablissement()">
+          <div class="mb-3">
+            <label class="form-label">Intitule</label>
+            <input type="text" class="form-control" name="intitule" formControlName="intitule" placeholder="Intitule">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Adresse</label>
+            <input type="text" class="form-control" name="adresse" formControlName="adresse" placeholder="Adresse">
+          </div>
+          <button type="submit" [disabled]="newEtablissementForm.invalid" class="btn btn-primary"
+            data-bs-dismiss="modal">Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,81 +1,107 @@
-<!-- <div class="card m-5">
-    <div class="card-header d-flex align-items-center justify-content-between">
-        <h1>Liste des laboratoires</h1>
-        <a class="btn btn-primary"  routerLink="/new-laboratoire">Ajouter laboratoire</a>
-    </div>
-    <div class="card-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Intitulé</th>
-                    <th scope="col">Departement</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let laboratoire of laboratoires">
-                    <td scope="row">{{laboratoire.id}}</td>
-                    <td>{{laboratoire.intitule}}</td>
-                    <td>{{laboratoire.departement}}</td>
-                    <td>
-                        <a class="text-success h5" href="#"><i class="bi bi-pen"></i></a>
-                        <a class="text-danger h5 ms-2" href="#"><i class="bi bi-trash3"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div> -->
-
-
-<h2>Laboratoires</h2>
-
-<!-- Display laboratoires -->
-<div *ngIf="laboratoires" class="table-responsive">
-    <table class="table table-striped">
+<div class="card m-5">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h1>Liste des Laboratoires</h1>
+    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#laboAdd">Ajouter laboratoire</a>
+  </div>
+  <div class="card-body">
+    <!-- Display laboratoires -->
+    <div *ngIf="laboratoires" class="table-responsive">
+      <table class="table table-striped">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Intitule</th>
-                <th>Departement</th>
-                <th>Etablissement</th>
-                <!-- Add additional fields if necessary -->
-            </tr>
+        <tr>
+          <th>ID</th>
+          <th>Intitule</th>
+          <th>Departement</th>
+          <th>Etablissement</th>
+          <!-- Add additional fields if necessary -->
+          <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let laboratoire of laboratoires">
-                <td>{{ laboratoire.id }}</td>
-                <td>{{ laboratoire.intitule }}</td>
-                <td>{{ laboratoire.departement }}</td>
-                <td>{{ laboratoire?.etablissement.intitule }}</td>
-                <!-- Display additional fields if necessary -->
-            </tr>
+        <tr *ngFor="let laboratoire of laboratoires">
+          <td>{{ laboratoire.id }}</td>
+          <td>{{ laboratoire.intitule }}</td>
+          <td>{{ laboratoire.departement }}</td>
+          <td>{{ laboratoire?.etablissement.intitule }}</td>
+          <!-- Display additional fields if necessary -->
+          <td>
+            <a class="text-success h5" href="#{{laboratoire.id}}" data-bs-toggle="modal" (click)="loadObjectData(laboratoire)" ><i class="bi bi-pen"></i></a>
+            <div class="modal fade" id="{{laboratoire.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Laboratoire {{laboratoire.id}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="editLaboratoireForm">
+                      <div class="mb-3 visually-hidden">
+                        <label class="form-label">ID</label>
+                        <input type="text" class="form-control" name="id" value="{{laboratoire.id}}" formControlName="id">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Intitule</label>
+                        <input type="text" class="form-control" name="intitule" value="{{laboratoire.intitule}}" formControlName="intitule">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Departement</label>
+                        <input type="text" class="form-control" name="adresse" value="{{laboratoire.departement}}" formControlName="departement">
+                      </div>
+                      <div class="form-group mb-3">
+                        <label for="etablissement">Etablissement:</label>
+                        <select class="form-control" formControlName="etablissement">
+                          <option *ngFor="let etablissement of etablissements" [ngValue]="etablissement" [selected]="etablissement.id === editLaboratoireForm.get('etablissement').value?.id">
+                            {{ etablissement.intitule }}
+                          </option>
+                        </select>
+                      </div>
+                      <button type="submit" class="btn btn-success" [disabled]="editLaboratoireForm.invalid" (click)="updateLaboratoire()" data-bs-dismiss="modal">Edit</button>
+                      <a class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="text-danger h5 ms-2"  (click)="deleteLaboratoire(laboratoire.id)"><i class="bi bi-trash3"></i></a>
+          </td>
+        </tr>
         </tbody>
-    </table>
+      </table>
+    </div>
+  </div>
 </div>
 
 
-<!-- Add New Laboratoire -->
-<h2>Ajouter un Laboratoire</h2>
-
-<form [formGroup]="newLaboratoireForm" (ngSubmit)="addLaboratoire()">
-    <div class="form-group">
-        <label for="intitule">Intitulé:</label>
-        <input type="text" class="form-control" id="intitule" formControlName="intitule">
-    </div>
-    <div class="form-group">
-        <label for="departement">Département:</label>
-        <input type="text" class="form-control" id="departement" formControlName="departement">
-    </div>
-    <div class="form-group">
-        <label for="etablissement">Etablissement:</label>
-        <select class="form-control" id="etablissement" formControlName="etablissement">
-            <option value="">Choisir Etablissement</option>
-            <option *ngFor="let etablissement of etablissements" [ngValue]="etablissement">
+<!-- Modal -->
+<div class="modal fade" id="laboAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="">Ajouter un Laboratoire</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newLaboratoireForm" (ngSubmit)="addLaboratoire()">
+          <div class="form-group">
+            <label for="intitule">Intitulé:</label>
+            <input type="text" class="form-control" id="intitule" formControlName="intitule">
+          </div>
+          <div class="form-group">
+            <label for="departement">Département:</label>
+            <input type="text" class="form-control" id="departement" formControlName="departement">
+          </div>
+          <div class="form-group">
+            <label for="etablissement">Etablissement:</label>
+            <select class="form-control" id="etablissement" formControlName="etablissement">
+              <option value="">Choisir Etablissement</option>
+              <option *ngFor="let etablissement of etablissements" [ngValue]="etablissement">
                 {{ etablissement.intitule }}
-            </option>
-        </select>
+              </option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3" data-bs-dismiss="modal" [disabled]="newLaboratoireForm.invalid" >Ajouter</button>
+        </form>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Ajouter</button>
-</form>
+  </div>
+</div>
