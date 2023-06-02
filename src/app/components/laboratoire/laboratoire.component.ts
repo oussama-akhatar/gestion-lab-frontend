@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Etablissement } from 'src/app/models/Etablissement';
-import { Laboratoire } from 'src/app/models/Laboratoire';
+import { Etablissement } from 'src/app/models/etablissement.model';
+
+import { Laboratoire } from 'src/app/models/laboratoire.model';
 import { EtablissementService } from 'src/app/services/etablissement.service';
 import { LaboratoireService } from 'src/app/services/laboratoire.service';
 
@@ -66,9 +67,7 @@ export class LaboratoireComponent implements OnInit {
         intitule: this.newLaboratoireForm.value.intitule,
         departement: this.newLaboratoireForm.value.departement,
         etablissement: {
-          id: this.newLaboratoireForm.value.etablissement.id,
-          intitule: '',
-          adresse: ''
+          id: this.newLaboratoireForm.value.etablissement.id
         }
       };
 

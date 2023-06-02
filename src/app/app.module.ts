@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewEtablissementComponent } from './components/etablissement/new-etablissement/new-etablissement.component';
 import { LaboratoireComponent } from './components/laboratoire/laboratoire.component';
 import { NewLaboratoireComponent } from './components/laboratoire/new-laboratoire/new-laboratoire.component';
+import { MembreComponent } from './components/membre/membre.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NewLaboratoireComponent } from './components/laboratoire/new-laboratoir
     EtablissementComponent,
     NewEtablissementComponent,
     LaboratoireComponent,
-    NewLaboratoireComponent
+    NewLaboratoireComponent,
+    MembreComponent
   ],
   imports: [
     BrowserModule,

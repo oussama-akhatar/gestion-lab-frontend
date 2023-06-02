@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EtablissementService} from "../../../services/etablissement.service";
-import {Etablissement} from "../../../models/Etablissement";
 import {Router} from "@angular/router";
+import { Etablissement } from 'src/app/models/etablissement.model';
 
 @Component({
   selector: 'app-new-etablissement',

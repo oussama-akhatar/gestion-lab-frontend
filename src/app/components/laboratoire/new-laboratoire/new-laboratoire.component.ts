@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Laboratoire } from 'src/app/models/Laboratoire';
+import { Laboratoire } from 'src/app/models/laboratoire.model';
 import { LaboratoireService } from 'src/app/services/laboratoire.service';
 
 @Component({

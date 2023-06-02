@@ -4,12 +4,14 @@ import { EtablissementComponent } from './components/etablissement/etablissement
 import {NewEtablissementComponent} from "./components/etablissement/new-etablissement/new-etablissement.component";
 import { LaboratoireComponent } from './components/laboratoire/laboratoire.component';
 import { NewLaboratoireComponent } from './components/laboratoire/new-laboratoire/new-laboratoire.component';
+import { MembreComponent } from './components/membre/membre.component';
 
 const routes: Routes = [
-  { path: 'etablissement', component: EtablissementComponent },
-  { path: 'addEtablissement', component: NewEtablissementComponent },
+  { path: 'etablissements', component: EtablissementComponent },
+  { path: 'new-etablissement', component: NewEtablissementComponent },
   { path: 'laboratoires', component: LaboratoireComponent },
   { path: 'new-laboratoire', component: NewLaboratoireComponent },
+  { path: 'membres', component: MembreComponent },
 ];
 
 @NgModule({

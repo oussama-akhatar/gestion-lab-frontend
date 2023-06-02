@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Laboratoire } from '../models/Laboratoire';
+import { Laboratoire } from '../models/laboratoire.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

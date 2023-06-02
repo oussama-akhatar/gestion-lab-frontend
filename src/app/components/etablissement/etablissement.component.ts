@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Etablissement } from 'src/app/models/Etablissement';
 import { EtablissementService } from 'src/app/services/etablissement.service';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Etablissement } from 'src/app/models/etablissement.model';
 
 @Component({
   selector: 'app-etablissement',
