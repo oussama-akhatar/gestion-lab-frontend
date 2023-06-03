@@ -1,39 +1,148 @@
-<div class="container">
-    <h2>Membre Form</h2>
+<div class="card m-5">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h1>Liste des Membres</h1>
+    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#membreAdd">Ajouter membre</a>
+  </div>
+  <div class="card-body">
+    <div *ngIf="membres" class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Date Naissance</th>
+          <th>Email</th>
+          <th>Telephone</th>
+          <th>isDirector</th>
+          <th>Laboratoire</th>
+          <!-- Add additional fields if necessary -->
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let membre of membres">
+          <td>{{ membre.id }}</td>
+          <td>{{ membre.nom }}</td>
+          <td>{{ membre.prenom }}</td>
+          <td>{{ membre.dateNaissance | date : 'dd/MM/yyyy' }}</td>
+          <td>{{ membre.email }}</td>
+          <td>{{ membre.telephone }}</td>
+          <td class="ps-4">
+            <i class="bi bi-check-circle-fill text-success h5" *ngIf="membre.directeur"></i>
+            <i class="bi bi bi-x-circle-fill text-danger h5" *ngIf="!membre.directeur"></i>
+          </td>
+          <td>{{ membre.laboratoire.intitule }}</td>
+          <td>
+            <a class="text-success h5" href="#{{membre.id}}" data-bs-toggle="modal" (click)="loadMembreFormData(membre)" ><i class="bi bi-pen"></i></a>
+            <div class="modal fade" id="{{membre.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Membre {{membre.id}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="editMembreForm">
+                      <div class="mb-3 visually-hidden">
+                        <label class="form-label">ID</label>
+                        <input type="text" class="form-control" name="id" value="{{membre.id}}" formControlName="id">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Nom</label>
+                        <input type="text" class="form-control" name="nom" value="{{membre.nom}}" formControlName="nom">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Prenom</label>
+                        <input type="text" class="form-control" name="prenom" value="{{membre.prenom}}" formControlName="prenom">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="text" class="form-control" name="email" value="{{membre.email}}" formControlName="email">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Date Naissance</label>
+                        <input type="date" class="form-control" name="dateNaissance" value="{{membre.dateNaissance}}" formControlName="dateNaissance">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Directeur</label>
+                        <input type="checkbox" class="form-check-input" name="directeur" value="{{membre.directeur}}" formControlName="directeur">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Telephone</label>
+                        <input type="text" class="form-control" name="telephone" value="{{membre.telephone}}" formControlName="telephone">
+                      </div>
+                      <div class="form-group mb-3">
+                        <label>Laboratoire:</label>
+                        <select class="form-select" formControlName="laboratoire">
+                          <option *ngFor="let laboratoire of laboratoires" [ngValue]="laboratoire" [selected]="laboratoire.id === editMembreForm.get('laboratoire').value?.id">
+                            {{ laboratoire.intitule }}
+                          </option>
+                        </select>
+                      </div>
+                      <button type="submit" class="btn btn-success" [disabled]="editMembreForm.invalid" (click)="updateMembre()" data-bs-dismiss="modal">Edit</button>
+                      <a class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="text-danger h5 ms-2" (click)="deleteMembre(membre.id)"><i class="bi bi-trash3"></i></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-    <form [formGroup]="newMembreForm" (ngSubmit)="addMembre()">
-        <div class="form-group">
+
+<div class="modal fade" id="membreAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="">Ajouter un Membre</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newMembreForm" (ngSubmit)="addMembre()">
+          <div class="form-group">
             <label for="nom">Nom</label>
             <input type="text" id="nom" formControlName="nom" class="form-control">
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="form-group">
             <label for="prenom">Prenom</label>
             <input type="text" id="prenom" formControlName="prenom" class="form-control">
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="form-group">
             <label for="dateNaissance">Date de Naissance</label>
             <input type="date" id="dateNaissance" formControlName="dateNaissance" class="form-control">
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" formControlName="email" class="form-control">
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="form-group">
             <label for="telephone">Telephone</label>
             <input type="text" id="telephone" formControlName="telephone" class="form-control">
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="form-group">
             <label for="directeur" class="form-check-label">Directeur</label>
             <input type="checkbox" id="directeur" formControlName="directeur" class="form-control form-check-input">
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="form-group mb-3">
             <label for="laboratoire">Laboratoire</label>
             <select id="laboratoire" formControlName="laboratoire" class="form-control">
-                <option *ngFor="let laboratoire of laboratoires" [ngValue]="laboratoire">
-                    {{ laboratoire.intitule }}
-                </option>
+              <option *ngFor="let laboratoire of laboratoires" [ngValue]="laboratoire">
+                {{ laboratoire.intitule }}
+              </option>
             </select>
-        </div>
-        <button type="submit" [disabled]="newMembreForm.invalid" class="btn btn-primary">Add Membre</button>
-    </form>
+          </div>
+          <button type="submit" [disabled]="newMembreForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">Add Membre</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+
+

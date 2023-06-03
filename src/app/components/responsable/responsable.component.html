@@ -1,0 +1,139 @@
+<div class="card m-5">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <h1>Liste des Responsables</h1>
+        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#responsableAdd">Ajouter Responsable</a>
+    </div>
+    <div class="card-body">
+        <div *ngIf="responsables" class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Date Naissance</th>
+                        <th>Email</th>
+                        <th>Telephone</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let responsable of responsables">
+                        <td>{{ responsable.id }}</td>
+                        <td>{{ responsable.nom }}</td>
+                        <td>{{ responsable.prenom }}</td>
+                        <td>{{ responsable.dateNaissance | date : 'dd/MM/yyyy' }}</td>
+                        <td>{{ responsable.email }}</td>
+                        <td>{{ responsable.telephone }}</td>
+                        <td>{{ responsable.type }}</td>
+                        <td>
+                            <a class="text-success h5" href="#{{responsable.id}}" data-bs-toggle="modal"
+                                (click)="loadResponsableFormData(responsable)"><i class="bi bi-pen"></i></a>
+                            <div class="modal fade" id="{{responsable.id}}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Responsable
+                                                {{responsable.id}}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form [formGroup]="editResponsableForm">
+                                                <div class="mb-3 visually-hidden">
+                                                    <label class="form-label">ID</label>
+                                                    <input type="text" class="form-control" name="id"
+                                                        value="{{responsable.id}}" formControlName="id">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Nom</label>
+                                                    <input type="text" class="form-control" name="nom"
+                                                        value="{{responsable.nom}}" formControlName="nom">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Prenom</label>
+                                                    <input type="text" class="form-control" name="prenom"
+                                                        value="{{responsable.prenom}}" formControlName="prenom">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Email</label>
+                                                    <input type="text" class="form-control" name="email"
+                                                        value="{{responsable.email}}" formControlName="email">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Date Naissance</label>
+                                                    <input type="date" class="form-control" name="dateNaissance"
+                                                        value="{{responsable.dateNaissance}}"
+                                                        formControlName="dateNaissance">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Telephone</label>
+                                                    <input type="text" class="form-control" name="telephone"
+                                                        value="{{responsable.telephone}}" formControlName="telephone">
+                                                </div>
+                                                <button type="submit" class="btn btn-success"
+                                                    [disabled]="editResponsableForm.invalid"
+                                                    (click)="updateResponsable()" data-bs-dismiss="modal">Edit</button>
+                                                <a class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="text-danger h5 ms-2" (click)="deleteResponsable(responsable.id)"><i
+                                    class="bi bi-trash3"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Ajouter un Responsable -->
+<div class="modal fade" id="responsableAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="">Ajouter un Responsable</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="newResponsableForm" (ngSubmit)="addResponsable()">
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" formControlName="nom" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="prenom">Prenom</label>
+                        <input type="text" id="prenom" formControlName="prenom" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateNaissance">Date de Naissance</label>
+                        <input type="date" id="dateNaissance" formControlName="dateNaissance" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" formControlName="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Telephone</label>
+                        <input type="text" id="telephone" formControlName="telephone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" name="type" class="form-select" formControlName="type" required>
+                            <option value="RA">Responsable Affaire Financiere</option>
+                            <option value="RM">Responsable Marche</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" [disabled]="newResponsableForm.invalid" class="btn btn-primary"
+                        data-bs-dismiss="modal">Add Responsable</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

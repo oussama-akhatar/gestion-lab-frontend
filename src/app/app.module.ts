@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { EtablissementComponent } from './components/etablissement/etablissement.component';
 import { LaboratoireComponent } from './components/laboratoire/laboratoire.component';
 import { MembreComponent } from './components/membre/membre.component';
+import { ResponsableComponent } from './components/responsable/responsable.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EtablissementComponent,
     LaboratoireComponent,
-    MembreComponent
+    MembreComponent,
+    ResponsableComponent
   ],
   imports: [
     BrowserModule,

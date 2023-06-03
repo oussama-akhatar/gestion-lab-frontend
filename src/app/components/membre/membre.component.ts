@@ -12,8 +12,10 @@ import { MembreService } from 'src/app/services/membre.service';
 })
 export class MembreComponent implements OnInit {
 
-  newMembreForm: FormGroup;
   laboratoires: Laboratoire[] = [];
+  membres: Membre[] = [];
+  newMembreForm: FormGroup;
+  editMembreForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,6 +26,7 @@ export class MembreComponent implements OnInit {
   ngOnInit(): void {
     this.initMembreForm();
     this.loadLaboratoires();
+    this.getAllMembres();
   }
 
   initMembreForm(): void {
@@ -36,6 +39,27 @@ export class MembreComponent implements OnInit {
       directeur: [false, Validators.required],
       laboratoire: [null, Validators.required]
     });
+    this.editMembreForm = this.formBuilder.group({
+      id: ['', Validators.required],
+      nom: ['', Validators.required],
+      prenom: [null, Validators.required],
+      dateNaissance: [new Date(), Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      telephone: [null, Validators.required],
+      directeur: [false, Validators.required],
+      laboratoire: [null, Validators.required]
+    });
+  }
+
+  getAllMembres() {
+    this.membreService.getAllMembres().subscribe(
+      (Membres: Membre[]) => {
+        this.membres = Membres;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
 
   loadLaboratoires(): void {
@@ -72,11 +96,64 @@ export class MembreComponent implements OnInit {
         console.log('Membre added successfully:', membreData);
         // Reset the form
         this.newMembreForm.reset();
+        this.getAllMembres();
       },
       error: err => {
         console.log('Error adding membre:', err);
       }
     });
+  }
+
+  loadMembreFormData(membre: Membre) {
+    this.editMembreForm.patchValue({
+      id: membre.id,
+      nom: membre.nom,
+      prenom: membre.prenom,
+      dateNaissance: membre.dateNaissance,
+      email: membre.email,
+      telephone: membre.telephone,
+      directeur: membre.directeur,
+      laboratoire: membre.laboratoire
+    });
+  }
+
+  updateMembre(): void {
+    const updatedMembre: Membre = {
+      id: this.editMembreForm.value.id,
+      nom: this.editMembreForm.value.nom,
+      prenom: this.editMembreForm.value.prenom,
+      dateNaissance: this.editMembreForm.value.dateNaissance,
+      email: this.editMembreForm.value.email,
+      telephone: this.editMembreForm.value.telephone,
+      directeur: this.editMembreForm.value.directeur,
+      laboratoire: {
+        id: this.editMembreForm.value.laboratoire.id
+      }
+    }
+    this.membreService.updateMembre(updatedMembre).subscribe(
+      (updatedLaboratoire: Laboratoire) => {
+        // Handle success, if needed
+        this.getAllMembres()
+        console.log(updatedLaboratoire)
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  deleteMembre(id: number) {
+    if (confirm("Etes vous sure !!"))
+      this.membreService.deleteMembre(id).subscribe(
+        (r) => {
+          // Handle success, if needed
+          console.log(r)
+          this.getAllMembres()
+        },
+        (error: any) => {
+          console.error(error);
+        }
+      );
   }
 
 }
