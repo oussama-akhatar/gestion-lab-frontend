@@ -9,6 +9,8 @@ import { LaboratoireComponent } from './components/laboratoire/laboratoire.compo
 import { MembreComponent } from './components/membre/membre.component';
 import { ProjetComponent } from './components/projet/projet.component';
 import { ProjetMembreComponent } from './components/projet-membre/projet-membre.component';
+import { ExpressionBesoinComponent } from './components/expression-besoin/expression-besoin.component';
+import { TypeBesoinComponent } from './components/type-besoin/type-besoin.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ProjetMembreComponent } from './components/projet-membre/projet-membre.
     LaboratoireComponent,
     MembreComponent,
     ProjetComponent,
-    ProjetMembreComponent
+    ProjetMembreComponent,
+    ExpressionBesoinComponent,
+    TypeBesoinComponent
   ],
   imports: [
     BrowserModule,

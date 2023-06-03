@@ -24,7 +24,7 @@ export class EtablissementService {
   }
 
   public editEtablissement(etablissement: Etablissement): Observable<Etablissement> {
-    return this.http.put<Etablissement>(`${this.baseUrl}/etablissement/update`, etablissement);
+    return this.http.put<Etablissement>(`${this.baseUrl}/update`, etablissement);
   }
 
   public deleteEtablissement(etablissement: Etablissement) {
