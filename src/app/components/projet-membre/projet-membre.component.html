@@ -1,0 +1,117 @@
+<div class="card m-5">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h1>Liste des Projets des Membres</h1>
+    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#projetMembreAdd">Associer un Projet à Membre</a>
+  </div>
+  <div class="card-body">
+    <div *ngIf="projetsMembres" class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Dotateur de Projet</th>
+          <th>Responsable du Projet</th>
+          <th>Nom du membre</th>
+          <th>Intitule du projet</th>
+          <!-- Add additional fields if necessary -->
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let projetMembre of projetsMembres">
+          <td>{{ projetMembre.id }}</td>
+          <td>{{ projetMembre.dotateurProjet }}</td>
+          <td class="ps-4">
+            <i class="bi bi-check-circle-fill text-success h5" *ngIf="projetMembre.responsableProjet"></i>
+            <i class="bi bi bi-x-circle-fill text-danger h5" *ngIf="!projetMembre.responsableProjet"></i>
+          </td>
+          <td>{{ projetMembre.membre.nom}} {{ projetMembre.membre.prenom}}</td>
+          <td>{{ projetMembre.projet.intitule}}</td>
+          <td>
+            <a class="text-success h5" href="#{{projetMembre.id}}" data-bs-toggle="modal" (click)="loadProjetMembreFormData(projetMembre)" ><i class="bi bi-pen"></i></a>
+            <div class="modal fade" id="{{projetMembre.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Projet du Membre {{projetMembre.id}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="editProjetMembreForm">
+                      <div class="mb-3 visually-hidden">
+                        <label class="form-label">ID</label>
+                        <input type="text" class="form-control" name="id" value="{{projetMembre.id}}" formControlName="id">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Dotateur du Projet</label>
+                        <input type="text" class="form-control" name="dotateurProjet" value="{{projetMembre.dotateurProjet}}" formControlName="dotateurProjet">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Responsable du Projet ?</label>
+                        <input type="checkbox" class="form-control form-check-input" name="responsableProjet" value="{{projetMembre.responsableProjet}}" formControlName="responsableProjet">
+                      </div>
+                      <div class="form-group mb-3">
+                        <label>Projet :</label>
+                        <select class="form-select" formControlName="projet">
+                          <option *ngFor="let projet of projets" [ngValue]="projet" [selected]="projet.id === editProjetMembreForm.get('projet').value?.id">
+                            {{ projet.intitule }}
+                          </option>
+                        </select>
+                      </div>
+                      <button type="submit" class="btn btn-success" [disabled]="editProjetMembreForm.invalid" (click)="updateProjetMembre()" data-bs-dismiss="modal">Edit</button>
+                      <a class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="text-danger h5 ms-2" (click)="deleteProjetMembre(projetMembre.id)"><i class="bi bi-trash3"></i></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="projetMembreAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="">Ajouter un Laboratoire</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newProjetMembreForm" (ngSubmit)="addProjetMembre()">
+          <div class="form-group">
+            <label for="dotateurProjet" class="form-check-label">Dotateur du Projet</label>
+            <input type="text" id="dotateurProjet" formControlName="dotateurProjet" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="responsableProjet" class="form-check-label">Responsable du Projet</label>
+            <input type="checkbox" id="responsableProjet" formControlName="responsableProjet" class="form-control form-check-input">
+          </div>
+          <div class="form-group mb-3">
+            <label for="membre">Membre</label>
+            <select id="membre" formControlName="membre" class="form-control">
+              <option *ngFor="let membre of membres" [ngValue]="membre">
+                {{ membre.nom }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="projet">Projet</label>
+            <select id="projet" formControlName="projet" class="form-control">
+              <option *ngFor="let projet of projets" [ngValue]="projet">
+                {{ projet.intitule }}
+              </option>
+            </select>
+          </div>
+          <button type="submit" [disabled]="newProjetMembreForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">Add Membre</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

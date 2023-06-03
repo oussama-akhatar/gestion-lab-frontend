@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Laboratoire } from 'src/app/models/laboratoire.model';
-import { Membre } from 'src/app/models/membre.model';
-import { LaboratoireService } from 'src/app/services/laboratoire.service';
-import { MembreService } from 'src/app/services/membre.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Laboratoire} from 'src/app/models/laboratoire.model';
+import {Membre} from 'src/app/models/membre.model';
+import {LaboratoireService} from 'src/app/services/laboratoire.service';
+import {MembreService} from 'src/app/services/membre.service';
 
 @Component({
   selector: 'app-membre',
@@ -21,7 +21,8 @@ export class MembreComponent implements OnInit {
     private formBuilder: FormBuilder,
     private membreService: MembreService,
     private laboratoireService: LaboratoireService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.initMembreForm();
@@ -132,32 +133,22 @@ export class MembreComponent implements OnInit {
       }
     }
     this.membreService.updateMembre(updatedMembre).subscribe(
-      (updatedLaboratoire: Laboratoire) => {
+      (updatedMembre: Membre) => {
         // Handle success, if needed
         this.getAllMembres()
-        console.log(updatedLaboratoire)
-      },
-      (error: any) => {
-        console.error(error);
+        console.log(updatedMembre)
       }
     );
   }
 
-
-
-
-  deleteMembre(id:number) {
+  deleteMembre(id: number) {
     if (confirm("Etes vous sure !!"))
       this.membreService.deleteMembre(id).subscribe(
         (r) => {
           // Handle success, if needed
           console.log(r)
           this.getAllMembres()
-        },
-        (error: any) => {
-          console.error(error);
         }
       );
   }
-
 }

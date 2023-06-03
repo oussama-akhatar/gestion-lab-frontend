@@ -7,13 +7,17 @@ import { AppComponent } from './app.component';
 import { EtablissementComponent } from './components/etablissement/etablissement.component';
 import { LaboratoireComponent } from './components/laboratoire/laboratoire.component';
 import { MembreComponent } from './components/membre/membre.component';
+import { ProjetComponent } from './components/projet/projet.component';
+import { ProjetMembreComponent } from './components/projet-membre/projet-membre.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EtablissementComponent,
     LaboratoireComponent,
-    MembreComponent
+    MembreComponent,
+    ProjetComponent,
+    ProjetMembreComponent
   ],
   imports: [
     BrowserModule,
