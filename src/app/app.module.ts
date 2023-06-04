@@ -13,6 +13,7 @@ import { ExpressionBesoinComponent } from './components/expression-besoin/expres
 import { TypeBesoinComponent } from './components/type-besoin/type-besoin.component';
 import { DotationUcaRechComponent } from './components/dotation-uca-rech/dotation-uca-rech.component';
 import { ProjetComponent } from './components/projet/projet.component';
+import { MembreDotationUcaRechComponent } from './components/membre-dotation-uca-rech/membre-dotation-uca-rech.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProjetComponent } from './components/projet/projet.component';
     ProjetMembreComponent,
     ExpressionBesoinComponent,
     TypeBesoinComponent,
-    DotationUcaRechComponent
+    DotationUcaRechComponent,
+    MembreDotationUcaRechComponent
   ],
   imports: [
     BrowserModule,

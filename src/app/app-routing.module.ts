@@ -9,6 +9,7 @@ import { ExpressionBesoinComponent } from "./components/expression-besoin/expres
 import { TypeBesoinComponent } from "./components/type-besoin/type-besoin.component";
 import { DotationUcaRechComponent } from "./components/dotation-uca-rech/dotation-uca-rech.component";
 import { ResponsableComponent } from './components/responsable/responsable.component';
+import {MembreDotationUcaRechComponent} from "./components/membre-dotation-uca-rech/membre-dotation-uca-rech.component";
 
 const routes: Routes = [
   { path: 'etablissements', component: EtablissementComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'projetsmembres', component: ProjetMembreComponent },
   { path: 'expressionbesoin', component: ExpressionBesoinComponent },
   { path: 'typebesoin', component: TypeBesoinComponent },
-  { path: 'dotationucarech', component: DotationUcaRechComponent }
+  { path: 'dotationucarech', component: DotationUcaRechComponent },
+  { path: 'membredotationucarech', component: MembreDotationUcaRechComponent }
 ];
 
 @NgModule({
