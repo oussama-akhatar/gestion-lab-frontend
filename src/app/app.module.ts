@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { EtablissementComponent } from './components/etablissement/etablissement.component';
 import { LaboratoireComponent } from './components/laboratoire/laboratoire.component';
 import { MembreComponent } from './components/membre/membre.component';
-import { ProjetComponent } from './components/projet/projet.component';
+import { ResponsableComponent } from './components/responsable/responsable.component';
 import { ProjetMembreComponent } from './components/projet-membre/projet-membre.component';
 import { ExpressionBesoinComponent } from './components/expression-besoin/expression-besoin.component';
 import { TypeBesoinComponent } from './components/type-besoin/type-besoin.component';
 import { DotationUcaRechComponent } from './components/dotation-uca-rech/dotation-uca-rech.component';
+import { ProjetComponent } from './components/projet/projet.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { DotationUcaRechComponent } from './components/dotation-uca-rech/dotatio
     EtablissementComponent,
     LaboratoireComponent,
     MembreComponent,
+    ResponsableComponent,
     ProjetComponent,
     ProjetMembreComponent,
     ExpressionBesoinComponent,

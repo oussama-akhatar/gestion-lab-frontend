@@ -14,7 +14,7 @@ import { LaboratoireService } from 'src/app/services/laboratoire.service';
 export class LaboratoireComponent implements OnInit {
 
   laboratoires: Laboratoire[] = [];
-  etablissements: Etablissement[];
+  etablissements: Etablissement[] = [];;
   newLaboratoireForm: FormGroup;
   editLaboratoireForm: FormGroup;
 
@@ -29,6 +29,8 @@ export class LaboratoireComponent implements OnInit {
     this.getAllLaboratoires();
     this.loadEtablissements();
   }
+
+  
 
   initForm(): void {
     this.newLaboratoireForm = this.formBuilder.group({

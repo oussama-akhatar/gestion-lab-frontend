@@ -12,10 +12,10 @@ import {MembreService} from 'src/app/services/membre.service';
 })
 export class MembreComponent implements OnInit {
 
+  laboratoires: Laboratoire[] = [];
+  membres: Membre[] = [];
   newMembreForm: FormGroup;
   editMembreForm: FormGroup;
-  laboratoires: Laboratoire[];
-  members: Membre[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,8 +54,8 @@ export class MembreComponent implements OnInit {
 
   getAllMembres() {
     this.membreService.getAllMembres().subscribe(
-      (members: Membre[]) => {
-        this.members = members;
+      (Membres: Membre[]) => {
+        this.membres = Membres;
       },
       (error: any) => {
         console.error(error);
@@ -103,7 +103,6 @@ export class MembreComponent implements OnInit {
         console.log('Error adding membre:', err);
       }
     });
-
   }
 
   loadMembreFormData(membre: Membre) {

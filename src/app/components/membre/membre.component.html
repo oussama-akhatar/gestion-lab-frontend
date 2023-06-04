@@ -1,10 +1,10 @@
 <div class="card m-5">
   <div class="card-header d-flex align-items-center justify-content-between">
     <h1>Liste des Membres</h1>
-    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#memberAdd">Ajouter membre</a>
+    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#membreAdd">Ajouter membre</a>
   </div>
   <div class="card-body">
-    <div *ngIf="members" class="table-responsive">
+    <div *ngIf="membres" class="table-responsive">
       <table class="table table-striped">
         <thead>
         <tr>
@@ -21,56 +21,56 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let member of members">
-          <td>{{ member.id }}</td>
-          <td>{{ member.nom }}</td>
-          <td>{{ member.prenom }}</td>
-          <td>{{ member.dateNaissance | date : 'dd/MM/yyyy' }}</td>
-          <td>{{ member.email }}</td>
-          <td>{{ member.telephone }}</td>
+        <tr *ngFor="let membre of membres">
+          <td>{{ membre.id }}</td>
+          <td>{{ membre.nom }}</td>
+          <td>{{ membre.prenom }}</td>
+          <td>{{ membre.dateNaissance | date : 'dd/MM/yyyy' }}</td>
+          <td>{{ membre.email }}</td>
+          <td>{{ membre.telephone }}</td>
           <td class="ps-4">
-            <i class="bi bi-check-circle-fill text-success h5" *ngIf="member.directeur"></i>
-            <i class="bi bi bi-x-circle-fill text-danger h5" *ngIf="!member.directeur"></i>
+            <i class="bi bi-check-circle-fill text-success h5" *ngIf="membre.directeur"></i>
+            <i class="bi bi bi-x-circle-fill text-danger h5" *ngIf="!membre.directeur"></i>
           </td>
-          <td>{{ member.laboratoire.intitule }}</td>
+          <td>{{ membre.laboratoire.intitule }}</td>
           <td>
-            <a class="text-success h5" href="#{{member.id}}" data-bs-toggle="modal" (click)="loadMembreFormData(member)" ><i class="bi bi-pen"></i></a>
-            <div class="modal fade" id="{{member.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <a class="text-success h5" href="#{{membre.id}}" data-bs-toggle="modal" (click)="loadMembreFormData(membre)" ><i class="bi bi-pen"></i></a>
+            <div class="modal fade" id="{{membre.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Membre {{member.id}}</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Membre {{membre.id}}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <form [formGroup]="editMembreForm">
                       <div class="mb-3 visually-hidden">
                         <label class="form-label">ID</label>
-                        <input type="text" class="form-control" name="id" value="{{member.id}}" formControlName="id">
+                        <input type="text" class="form-control" name="id" value="{{membre.id}}" formControlName="id">
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Nom</label>
-                        <input type="text" class="form-control" name="nom" value="{{member.nom}}" formControlName="nom">
+                        <input type="text" class="form-control" name="nom" value="{{membre.nom}}" formControlName="nom">
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Prenom</label>
-                        <input type="text" class="form-control" name="prenom" value="{{member.prenom}}" formControlName="prenom">
+                        <input type="text" class="form-control" name="prenom" value="{{membre.prenom}}" formControlName="prenom">
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="text" class="form-control" name="email" value="{{member.email}}" formControlName="email">
+                        <input type="text" class="form-control" name="email" value="{{membre.email}}" formControlName="email">
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Date Naissance</label>
-                        <input type="date" class="form-control" name="dateNaissance" value="{{member.dateNaissance}}" formControlName="dateNaissance">
+                        <input type="date" class="form-control" name="dateNaissance" value="{{membre.dateNaissance}}" formControlName="dateNaissance">
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Directeur</label>
-                        <input type="checkbox" class="form-check-input" name="directeur" value="{{member.directeur}}" formControlName="directeur">
+                        <input type="checkbox" class="form-check-input" name="directeur" value="{{membre.directeur}}" formControlName="directeur">
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Telephone</label>
-                        <input type="text" class="form-control" name="telephone" value="{{member.telephone}}" formControlName="telephone">
+                        <input type="text" class="form-control" name="telephone" value="{{membre.telephone}}" formControlName="telephone">
                       </div>
                       <div class="form-group mb-3">
                         <label>Laboratoire:</label>
@@ -87,7 +87,7 @@
                 </div>
               </div>
             </div>
-            <a class="text-danger h5 ms-2" (click)="deleteMembre(member.id)"><i class="bi bi-trash3"></i></a>
+            <a class="text-danger h5 ms-2" (click)="deleteMembre(membre.id)"><i class="bi bi-trash3"></i></a>
           </td>
         </tr>
         </tbody>
@@ -97,11 +97,11 @@
 </div>
 
 
-<div class="modal fade" id="memberAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="membreAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="">Ajouter un Laboratoire</h1>
+        <h1 class="modal-title fs-5" id="">Ajouter un Membre</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
