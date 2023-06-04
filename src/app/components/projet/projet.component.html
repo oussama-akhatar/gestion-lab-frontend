@@ -1,0 +1,111 @@
+<div class="card m-5">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h1>Liste des Projets</h1>
+    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#projetAdd">Ajouter Projet</a>
+  </div>
+  <div class="card-body">
+    <div *ngIf="projets" class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Intitule</th>
+          <th>Date Début</th>
+          <th>Date Fin</th>
+          <th>Budget</th>
+          <!-- Add additional fields if necessary -->
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let projet of projets">
+          <td>{{ projet.id }}</td>
+          <td>{{ projet.intitule }}</td>
+          <td>{{ projet.dateDebut | date : 'dd/MM/yyyy' }}</td>
+          <td>{{ projet.dateFin | date : 'dd/MM/yyyy' }}</td>
+          <td>{{ projet.budget | currency: 'USD' }}</td>
+          <td>
+            <a class="text-success h5" href="#{{projet.id}}" data-bs-toggle="modal" (click)="loadProjetFormData(projet)" ><i class="bi bi-pen"></i></a>
+            <div class="modal fade" id="{{projet.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Projet {{projet.id}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="editProjetForm">
+                      <div class="mb-3 visually-hidden">
+                        <label class="form-label">ID</label>
+                        <input type="text" class="form-control" name="id" value="{{projet.id}}" formControlName="id">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Intitule</label>
+                        <input type="text" class="form-control" name="intitule" value="{{projet.intitule}}" formControlName="intitule">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Budget</label>
+                        <input type="number" class="form-control" name="budget" value="{{projet.budget}}" formControlName="budget">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Date de Debut</label>
+                        <input type="date" class="form-control" name="dateDebut" value="{{projet.dateDebut}}" formControlName="dateDebut">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Date de Fin</label>
+                        <input type="date" class="form-control" name="dateFin" value="{{projet.dateFin}}" formControlName="dateFin">
+                        <div *ngIf="editProjetForm.get('dateFin').hasError('dateRange')" class="text-danger">
+                          La date de fin doit être supérieure à la date de début.
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-success" [disabled]="editProjetForm.invalid" (click)="updateProjet()" data-bs-dismiss="modal">Edit</button>
+                      <a class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="text-danger h5 ms-2" (click)="deleteProjet(projet.id)"><i class="bi bi-trash3"></i></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="projetAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="">Ajouter un Projet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newProjetForm" (ngSubmit)="addProjet()">
+          <div class="form-group">
+            <label for="intitule">Intitule</label>
+            <input type="text" id="intitule" formControlName="intitule" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="budget">Budget</label>
+            <input type="number" id="budget" formControlName="budget" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="dateDebut">Date de Début</label>
+            <input type="date" id="dateDebut" formControlName="dateDebut" class="form-control">
+          </div>
+          <div class="form-group mb-3">
+            <label for="dateFin">Date de Fin</label>
+            <input type="date" id="dateFin" formControlName="dateFin" class="form-control">
+            <div *ngIf="newProjetForm.get('dateFin').hasError('dateRange')" class="text-danger">
+              La date de fin doit être supérieure à la date de début.
+            </div>
+          </div>
+          <button type="submit" [disabled]="newProjetForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">Add Projet</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
