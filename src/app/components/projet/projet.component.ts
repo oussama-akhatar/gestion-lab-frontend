@@ -83,7 +83,7 @@ export class ProjetComponent implements OnInit{
       error: err => {
         console.log('Error adding membre:', err);
       }
-    })
+    });
   }
 
   loadProjetFormData(projet: Projet) {

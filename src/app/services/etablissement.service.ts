@@ -11,8 +11,6 @@ import { environment } from 'src/environments/environment';
 export class EtablissementService {
 
   private baseUrl = `${environment.apiBaseUrl}/etablissement`;
-
-
   constructor(private http: HttpClient) { }
 
   public getAllEtablissements(): Observable<Etablissement[]> {

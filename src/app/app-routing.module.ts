@@ -7,6 +7,8 @@ import {ProjetComponent} from "./components/projet/projet.component";
 import {ProjetMembreComponent} from "./components/projet-membre/projet-membre.component";
 import {ExpressionBesoinComponent} from "./components/expression-besoin/expression-besoin.component";
 import {TypeBesoinComponent} from "./components/type-besoin/type-besoin.component";
+import {DotationUcaRechService} from "./services/dotation-uca-rech.service";
+import {DotationUcaRechComponent} from "./components/dotation-uca-rech/dotation-uca-rech.component";
 
 const routes: Routes = [
   {path: 'etablissements', component: EtablissementComponent},
@@ -15,7 +17,8 @@ const routes: Routes = [
   {path: 'projets', component: ProjetComponent},
   {path: 'projetsmembres', component: ProjetMembreComponent},
   {path: 'expressionbesoin', component: ExpressionBesoinComponent},
-  {path: 'typebesoin', component: TypeBesoinComponent}
+  {path: 'typebesoin', component: TypeBesoinComponent},
+  {path: 'dotationucarech', component: DotationUcaRechComponent}
 ];
 
 @NgModule({
