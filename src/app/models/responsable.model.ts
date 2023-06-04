@@ -5,5 +5,5 @@ export interface Responsable {
     dateNaissance: Date;
     email: string;
     telephone: string;
-    type: string;
+    typeResponsabilite: string;
 }

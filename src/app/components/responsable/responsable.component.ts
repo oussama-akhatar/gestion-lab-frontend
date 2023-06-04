@@ -31,7 +31,7 @@ export class ResponsableComponent implements OnInit {
       dateNaissance: [new Date(), Validators.required],
       email: [null, [Validators.required, Validators.email]],
       telephone: [null, Validators.required],
-      type: [null, Validators.required]
+      typeResponsabilite: ['RAF', Validators.required]
     });
     this.editResponsableForm = this.formBuilder.group({
       id: [null, Validators.required],
@@ -40,7 +40,7 @@ export class ResponsableComponent implements OnInit {
       dateNaissance: [new Date(), Validators.required],
       email: [null, [Validators.required, Validators.email]],
       telephone: [null, Validators.required],
-      type: [null, Validators.required]
+      typeResponsabilite: [null, Validators.required]
     });
   }
 
@@ -48,6 +48,8 @@ export class ResponsableComponent implements OnInit {
     this.responsableService.getAllResponsables().subscribe(
       (responsables: Responsable[]) => {
         this.responsables = responsables;
+        console.log(responsables);
+        
       },
       (error: any) => {
         console.error(error);
@@ -67,7 +69,7 @@ export class ResponsableComponent implements OnInit {
       dateNaissance: this.newResponsableForm.value.dateNaissance,
       email: this.newResponsableForm.value.email,
       telephone: this.newResponsableForm.value.telephone,
-      type: this.newResponsableForm.value.type
+      typeResponsabilite: this.newResponsableForm.value.typeResponsabilite
     };
 
     this.responsableService.addResponsable(ResponsableData).subscribe({
@@ -83,14 +85,15 @@ export class ResponsableComponent implements OnInit {
     });
   }
 
-  loadResponsableFormData(Responsable: Responsable) {
+  loadResponsableFormData(responsable: Responsable) {
     this.editResponsableForm.patchValue({
-      id: Responsable.id,
-      nom: Responsable.nom,
-      prenom: Responsable.prenom,
-      dateNaissance: Responsable.dateNaissance,
-      email: Responsable.email,
-      telephone: Responsable.telephone
+      id: responsable.id,
+      nom: responsable.nom,
+      prenom: responsable.prenom,
+      dateNaissance: responsable.dateNaissance,
+      email: responsable.email,
+      telephone: responsable.telephone,
+      typeResponsabilite: responsable.typeResponsabilite
     });
   }
 
@@ -102,8 +105,9 @@ export class ResponsableComponent implements OnInit {
       dateNaissance: this.editResponsableForm.value.dateNaissance,
       email: this.editResponsableForm.value.email,
       telephone: this.editResponsableForm.value.telephone,
-      type: this.newResponsableForm.value.type
+      typeResponsabilite: this.editResponsableForm.value.typeResponsabilite
     }
+    console.log(updatedResponsable);
     this.responsableService.updateResponsable(updatedResponsable).subscribe({
       next: data => {
         console.log('Responsable updated successfully:', updatedResponsable);

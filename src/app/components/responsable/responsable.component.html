@@ -14,7 +14,7 @@
                         <th>Date Naissance</th>
                         <th>Email</th>
                         <th>Telephone</th>
-                        <th>Type</th>
+                        <th>Responsabilite</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -26,7 +26,12 @@
                         <td>{{ responsable.dateNaissance | date : 'dd/MM/yyyy' }}</td>
                         <td>{{ responsable.email }}</td>
                         <td>{{ responsable.telephone }}</td>
-                        <td>{{ responsable.type }}</td>
+                        <td *ngIf="responsable.typeResponsabilite==='RAF'">
+                            Responsable Affiares Financieres
+                        </td>
+                        <td *ngIf="responsable.typeResponsabilite==='RM'">
+                            Responsable Marches
+                        </td>
                         <td>
                             <a class="text-success h5" href="#{{responsable.id}}" data-bs-toggle="modal"
                                 (click)="loadResponsableFormData(responsable)"><i class="bi bi-pen"></i></a>
@@ -72,6 +77,13 @@
                                                     <label class="form-label">Telephone</label>
                                                     <input type="text" class="form-control" name="telephone"
                                                         value="{{responsable.telephone}}" formControlName="telephone">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="typeResponsabilite">Type</label>
+                                                    <select id="typeResponsabilite" name="typeResponsabilite" class="form-select" formControlName="typeResponsabilite">
+                                                        <option value="RAF" [selected]="responsable.typeResponsabilite === 'RAF'">Responsable Affaires Financieres</option>
+                                                        <option value="RM" [selected]="responsable.typeResponsabilite === 'RM'">Responsable Marche</option>
+                                                    </select>
                                                 </div>
                                                 <button type="submit" class="btn btn-success"
                                                     [disabled]="editResponsableForm.invalid"
@@ -123,9 +135,9 @@
                         <input type="text" id="telephone" formControlName="telephone" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="type">Type</label>
-                        <select id="type" name="type" class="form-select" formControlName="type" required>
-                            <option value="RA">Responsable Affaire Financiere</option>
+                        <label for="typeResponsabilite">Type</label>
+                        <select id="typeResponsabilite" name="typeResponsabilite" class="form-select" formControlName="typeResponsabilite" required>
+                            <option value="RAF">Responsable Affaire Financiere</option>
                             <option value="RM">Responsable Marche</option>
                         </select>
                     </div>
