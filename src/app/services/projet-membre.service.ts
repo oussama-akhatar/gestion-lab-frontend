@@ -9,7 +9,7 @@ import {ProjetMembre} from "../models/projetMembre.model";
   providedIn: 'root'
 })
 export class ProjetMembreService {
-  private baseUrl = `${environment.apiBaseUrl}/membreProjet`;
+  private baseUrl = `${environment.apiBaseUrl}/projetMembre`;
   constructor(private http: HttpClient) { }
 
   getAllProjetsMembres(): Observable<ProjetMembre[]> {

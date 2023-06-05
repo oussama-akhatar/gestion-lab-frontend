@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {Projet} from "../../models/projet.model";
-import {ProjetService} from "../../services/projet.service";
-import {Membre} from "../../models/membre.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { Projet } from "../../models/projet.model";
+import { ProjetService } from "../../services/projet.service";
+import { Membre } from "../../models/membre.model";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-projet',
   templateUrl: './projet.component.html',
   styleUrls: ['./projet.component.css']
 })
-export class ProjetComponent implements OnInit{
+export class ProjetComponent implements OnInit {
 
   newProjetForm: FormGroup;
   editProjetForm: FormGroup;
@@ -18,7 +18,7 @@ export class ProjetComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private projetService: ProjetService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initProjetForm();
@@ -31,14 +31,14 @@ export class ProjetComponent implements OnInit{
       budget: [null, Validators.required],
       dateDebut: [null, Validators.required],
       dateFin: [null, Validators.required]
-    },{ validators: this.dateRangeValidator });
+    }, { validators: this.dateRangeValidator });
     this.editProjetForm = this.formBuilder.group({
       id: [null, Validators.required],
       intitule: [null, Validators.required],
       budget: [null, Validators.required],
       dateDebut: [null, Validators.required],
       dateFin: [null, Validators.required]
-    },{ validators: this.dateRangeValidator });
+    }, { validators: this.dateRangeValidator });
   }
 
   dateRangeValidator(formGroup: FormGroup) {

@@ -81,7 +81,7 @@ export class MembreComponent implements OnInit {
     }
 
     const membreData: Membre = {
-      nom: this.newMembreForm.value.nom,
+      nom: this.newMembreForm.value.nom.toUpperCase(),
       prenom: this.newMembreForm.value.prenom,
       dateNaissance: this.newMembreForm.value.dateNaissance,
       email: this.newMembreForm.value.email,

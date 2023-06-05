@@ -95,7 +95,7 @@
           </div>
           <div class="form-group mb-3">
             <label for="membre">Membre</label>
-            <select id="membre" formControlName="membre" class="form-control">
+            <select id="membre" formControlName="membre" class="form-select">
               <option *ngFor="let membre of membres" [ngValue]="membre">
                 {{ membre.nom }}
               </option>
@@ -103,7 +103,7 @@
           </div>
           <div class="form-group mb-3">
             <label for="projet">Projet</label>
-            <select id="projet" formControlName="projet" class="form-control">
+            <select id="projet" formControlName="projet" class="form-select">
               <option *ngFor="let projet of projets" [ngValue]="projet">
                 {{ projet.intitule }}
               </option>
