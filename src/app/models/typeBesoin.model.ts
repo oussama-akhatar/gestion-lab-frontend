@@ -1,4 +1,4 @@
 export interface TypeBesoin {
-  id: number,
-  description: string
+  id?: number,
+  description?: string
 }

@@ -63,7 +63,7 @@ export class ResponsableComponent implements OnInit {
       return;
     }
 
-    const ResponsableData: Responsable = {
+    const responsableData: Responsable = {
       nom: this.newResponsableForm.value.nom,
       prenom: this.newResponsableForm.value.prenom,
       dateNaissance: this.newResponsableForm.value.dateNaissance,
@@ -72,9 +72,9 @@ export class ResponsableComponent implements OnInit {
       typeResponsabilite: this.newResponsableForm.value.typeResponsabilite
     };
 
-    this.responsableService.addResponsable(ResponsableData).subscribe({
+    this.responsableService.addResponsable(responsableData).subscribe({
       next: data => {
-        console.log('Responsable added successfully:', ResponsableData);
+        console.log('Responsable added successfully:', responsableData);
         // Reset the form
         this.newResponsableForm.reset();
         this.getAllResponsables();

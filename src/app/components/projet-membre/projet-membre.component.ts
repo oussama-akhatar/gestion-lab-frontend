@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {Projet} from "../../models/projet.model";
-import {ProjetMembre} from "../../models/projetMembre.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ProjetService} from "../../services/projet.service";
-import {ProjetMembreService} from "../../services/projet-membre.service";
-import {Membre} from "../../models/membre.model";
-import {MembreService} from "../../services/membre.service";
-import {Laboratoire} from "../../models/laboratoire.model";
+import { Component, OnInit } from '@angular/core';
+import { Projet } from "../../models/projet.model";
+import { ProjetMembre } from "../../models/projetMembre.model";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ProjetService } from "../../services/projet.service";
+import { ProjetMembreService } from "../../services/projet-membre.service";
+import { Membre } from "../../models/membre.model";
+import { MembreService } from "../../services/membre.service";
+import { Laboratoire } from "../../models/laboratoire.model";
 
 @Component({
   selector: 'app-projet-membre',
   templateUrl: './projet-membre.component.html',
   styleUrls: ['./projet-membre.component.css']
 })
-export class ProjetMembreComponent implements OnInit{
+export class ProjetMembreComponent implements OnInit {
   newProjetMembreForm: FormGroup;
   editProjetMembreForm: FormGroup;
   projetsMembres: ProjetMembre[];
@@ -25,7 +25,7 @@ export class ProjetMembreComponent implements OnInit{
     private projetMembreService: ProjetMembreService,
     private membreService: MembreService,
     private projetService: ProjetService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getAllProjetsMembres();
@@ -37,7 +37,7 @@ export class ProjetMembreComponent implements OnInit{
   initProjetMembreForm() {
     this.newProjetMembreForm = this.formBuilder.group({
       dotateurProjet: [null, Validators.required],
-      responsableProjet: [null, Validators.required],
+      responsableProjet: [false, Validators.required],
       projet: [null, Validators.required],
       membre: [null, Validators.required]
     });
@@ -112,7 +112,7 @@ export class ProjetMembreComponent implements OnInit{
   }
 
   updateProjetMembre() {
-    const updatedProjetMembre : ProjetMembre = {
+    const updatedProjetMembre: ProjetMembre = {
       id: this.editProjetMembreForm.value.id,
       responsableProjet: this.editProjetMembreForm.value.responsableProjet,
       dotateurProjet: this.editProjetMembreForm.value.dotateurProjet,
