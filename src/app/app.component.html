@@ -13,40 +13,43 @@
         <li class="nav-item" *ngIf="sessionValue == 'respo'">
           <a class="nav-link" routerLink="/dashboard-responsable">Dashboard Responsable</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo'">
+        <li class="nav-item" *ngIf="sessionValue == 'directeur'">
+          <a class="nav-link" routerLink="/dashboard-directeur">Dashboard Directeur</a>
+        </li>
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/etablissements">Etablissements</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo'">
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/laboratoires">Laboratoires</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo'">
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/membres">Membres</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo'">
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/responsables">Responsables</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo'">
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/projets">Projets</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo'">
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/projetsmembres">Projets Membres</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo'">
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/expressionbesoin">Expression Besoin</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo'">
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/typebesoin">Type Besoin</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo'">
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/dotationucarech">Dotation Uca Rech</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo'">
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/membredotationucarech">Membre et Dotation Uca Rech</a>
         </li>
       </ul>
       <div class="d-flex">
-        <a class="btn btn-success" routerLink="/login" *ngIf="sessionValue!= 'membre' && sessionValue != 'respo'">Login <i class="bi bi-arrow-right"></i> </a>
-        <a class="btn btn-outline-dark ms-2" (click)="logout()" *ngIf="sessionValue== 'membre' || sessionValue == 'respo'">Logout <i class="bi bi-arrow-right"></i> </a>
+        <a class="btn btn-success" routerLink="/login" *ngIf="sessionValue!= 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">Login <i class="bi bi-arrow-right"></i> </a>
+        <a class="btn btn-outline-dark ms-2" (click)="logout()" *ngIf="sessionValue== 'membre' || sessionValue == 'respo' || sessionValue == 'directeur'">Logout <i class="bi bi-arrow-right"></i> </a>
       </div>
     </div>
   </div>

@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashborardMembreComponent } from './components/dashborard-membre/dashborard-membre.component';
 import {LocalStorageService, SessionStorageService} from "ngx-webstorage";
 import { DashboardResponsableComponent } from './components/dashboard-responsable/dashboard-responsable.component';
+import { DashboardDirecteurComponent } from './components/dashboard-directeur/dashboard-directeur.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { DashboardResponsableComponent } from './components/dashboard-responsabl
     MembreDotationUcaRechComponent,
     LoginComponent,
     DashborardMembreComponent,
-    DashboardResponsableComponent
+    DashboardResponsableComponent,
+    DashboardDirecteurComponent
   ],
   imports: [
     BrowserModule,

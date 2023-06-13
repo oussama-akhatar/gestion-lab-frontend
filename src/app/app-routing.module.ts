@@ -13,6 +13,7 @@ import {MembreDotationUcaRechComponent} from "./components/membre-dotation-uca-r
 import {LoginComponent} from "./components/login/login.component";
 import {DashborardMembreComponent} from "./components/dashborard-membre/dashborard-membre.component";
 import {DashboardResponsableComponent} from "./components/dashboard-responsable/dashboard-responsable.component";
+import {DashboardDirecteurComponent} from "./components/dashboard-directeur/dashboard-directeur.component";
 
 const routes: Routes = [
   {path: '', component: EtablissementComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'membredotationucarech', component: MembreDotationUcaRechComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard-membre', component: DashborardMembreComponent},
+  {path: 'dashboard-directeur', component: DashboardDirecteurComponent},
   {path: 'dashboard-responsable', component: DashboardResponsableComponent}
 ];
 

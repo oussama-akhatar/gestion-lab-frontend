@@ -61,7 +61,7 @@ export class DashborardMembreComponent implements OnInit {
             console.log("dd")
           }
         }
-      })
+      });
   }
 
 

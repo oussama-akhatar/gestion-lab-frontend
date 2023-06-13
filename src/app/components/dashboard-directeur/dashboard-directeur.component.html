@@ -1,0 +1,157 @@
+<div class="card m-5">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h1>Welcome Directeur : {{directeur?.nom}} {{directeur?.prenom}}</h1>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Date Naissance</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Telephone</th>
+          <th>Laboratoire</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{ directeur?.id }}</td>
+          <td>{{ directeur?.nom }}</td>
+          <td>{{ directeur?.prenom }}</td>
+          <td>{{ directeur?.dateNaissance | date : 'dd/MM/yyyy' }}</td>
+          <td>{{ directeur?.email }}</td>
+          <td>{{ directeur?.password }}</td>
+          <td>{{ directeur?.telephone }}</td>
+          <td>{{ directeur?.laboratoire.intitule }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="card m-5">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h1>Liste des Expressions de Besoins des membres de Labo : {{lab}}</h1>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+          <th>Type de Besoin</th>
+          <th>Montant Aprox</th>
+          <th>Date de demande</th>
+          <th>Date de validation</th>
+          <th>Responsable</th>
+          <th>Valide?</th>
+          <th>Membre</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let membreOfLab of membresOfLabo">
+          <ng-container *ngFor="let exp of membreOfLab.expressionBesoins">
+            <tr>
+              <td>{{exp.id}}</td>
+              <td>{{exp.description}}</td>
+              <td>{{exp.typeBesoin.description}}</td>
+              <td>{{exp.montant}}</td>
+              <td *ngIf="exp.dateDemande != null">{{ exp.dateDemande }}</td>
+              <td *ngIf="exp.dateDemande == null">-</td>
+              <td *ngIf="exp.dateValidation != null">{{ exp.dateValidation }}</td>
+              <td *ngIf="exp.dateValidation == null">-</td>
+              <td>{{exp.responsable?.nom}} {{exp.responsable?.prenom}}</td>
+              <td class="ps-4">
+                <i class="bi bi-check-circle-fill text-success h5" *ngIf="exp.validerDirecteur"></i>
+                <i class="bi bi bi-x-circle-fill text-danger h5" *ngIf="!exp.validerDirecteur"></i>
+              </td>
+              <td>{{membreOfLab?.nom}} {{membreOfLab?.prenom}}</td>
+              <td>
+                <a class="text-success h5 ms-2" href="#{{exp.id}}" data-bs-toggle="modal" (click)="loadExpressionBesoinFormData(exp, membreOfLab)"><i class="bi bi-check-circle"></i></a>
+                <div class="modal fade" id="{{exp.id}}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Expression de besoins
+                          {{exp.id}}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form [formGroup]="editExpressionBesoinForm">
+                          <div class="mb-3 visually-hidden">
+                            <label class="form-label">ID</label>
+                            <input type="text" class="form-control" name="id" value="{{exp.id}}" formControlName="id">
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <input type="text" class="form-control" name="description" value="{{exp.description}}" formControlName="description">
+                          </div>
+                          <div class="mb-3 visually-hidden">
+                            <label class="form-label">Date Demande</label>
+                            <input type="text" class="form-control" name="dateDemande" value="{{exp.dateDemande}}" formControlName="dateDemande">
+                          </div>
+                          <div class="mb-3 visually-hidden">
+                            <label class="form-label">Date Demande</label>
+                            <input type="text" class="form-control" name="dateDemande" value="{{exp.montant}}" formControlName="montant">
+                          </div>
+                          <div class="mb-3 visually-hidden">
+                            <label class="form-label">Date Demande</label>
+                            <input type="text" class="form-control" name="montantEffectif" value="{{exp.montantEffectif}}" formControlName="montantEffectif">
+                          </div>
+                          <div class="mb-3 visually-hidden">
+                            <label class="form-label">Date Validation</label>
+                            <input type="text" class="form-control" name="dateValidation" value="{{exp.dateValidation}}" formControlName="dateValidation">
+                          </div>
+                          <div class="mb-3 visually-hidden">
+                            <label class="form-label">Membre</label>
+                            <input type="text" class="form-control" name="membre" value="{{membreOfLab}}" formControlName="membre">
+                          </div>
+                          <div class="mb-3 visually-hidden">
+                            <label class="form-label">typeBesoin</label>
+                            <input type="text" class="form-control" name="typeBesoin" value="{{exp.typeBesoin}}" formControlName="typeBesoin">
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">Validation du Directeur ?</label>
+                            <input type="checkbox" class="form-control form-check-input" name="validerDirecteur" value="{{exp.validerDirecteur}}" formControlName="validerDirecteur">
+                          </div>
+                          <div class="form-group mb-3">
+                            <label>Responsable :</label>
+                            <select class="form-select" formControlName="responsable">
+                              <option *ngFor="let responsable of responsables"
+                                      [ngValue]="responsable"
+                                      [selected]="responsable.id === editExpressionBesoinForm.get('responsable').value?.id">
+                                {{ responsable.nom }} {{ responsable.prenom }}
+                              </option>
+                            </select>
+                          </div>
+                          <button type="submit" class="btn btn-success"
+                                  [disabled]="editExpressionBesoinForm.invalid"
+                                  (click)="updateExpressionBesoin()"
+                                  data-bs-dismiss="modal">Edit
+                          </button>
+                          <a class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="text-danger h5 ms-2" (click)="deleteExpressionBesoin(exp.id)"><i class="bi bi-trash3"></i></a>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
