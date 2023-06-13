@@ -93,51 +93,18 @@
                             <input type="text" class="form-control" name="id" value="{{exp.id}}" formControlName="id">
                           </div>
                           <div class="mb-3">
-                            <label class="form-label">Description</label>
-                            <input type="text" class="form-control" name="description" value="{{exp.description}}" formControlName="description">
-                          </div>
-                          <div class="mb-3 visually-hidden">
-                            <label class="form-label">Date Demande</label>
-                            <input type="text" class="form-control" name="dateDemande" value="{{exp.dateDemande}}" formControlName="dateDemande">
-                          </div>
-                          <div class="mb-3 visually-hidden">
-                            <label class="form-label">Date Demande</label>
-                            <input type="text" class="form-control" name="dateDemande" value="{{exp.montant}}" formControlName="montant">
-                          </div>
-                          <div class="mb-3 visually-hidden">
-                            <label class="form-label">Date Demande</label>
-                            <input type="text" class="form-control" name="montantEffectif" value="{{exp.montantEffectif}}" formControlName="montantEffectif">
-                          </div>
-                          <div class="mb-3 visually-hidden">
-                            <label class="form-label">Date Validation</label>
-                            <input type="text" class="form-control" name="dateValidation" value="{{exp.dateValidation}}" formControlName="dateValidation">
-                          </div>
-                          <div class="mb-3 visually-hidden">
-                            <label class="form-label">Membre</label>
-                            <input type="text" class="form-control" name="membre" value="{{membreOfLab}}" formControlName="membre">
-                          </div>
-                          <div class="mb-3 visually-hidden">
-                            <label class="form-label">typeBesoin</label>
-                            <input type="text" class="form-control" name="typeBesoin" value="{{exp.typeBesoin}}" formControlName="typeBesoin">
-                          </div>
-                          <div class="mb-3">
                             <label class="form-label">Validation du Directeur ?</label>
                             <input type="checkbox" class="form-control form-check-input" name="validerDirecteur" value="{{exp.validerDirecteur}}" formControlName="validerDirecteur">
                           </div>
                           <div class="form-group mb-3">
                             <label>Responsable :</label>
                             <select class="form-select" formControlName="responsable">
-                              <option *ngFor="let responsable of responsables"
-                                      [ngValue]="responsable"
-                                      [selected]="responsable.id === editExpressionBesoinForm.get('responsable').value?.id">
+                              <option *ngFor="let responsable of responsables" [ngValue]="responsable" [selected]="responsable.id === editExpressionBesoinForm.get('responsable').value?.id">
                                 {{ responsable.nom }} {{ responsable.prenom }}
                               </option>
                             </select>
                           </div>
-                          <button type="submit" class="btn btn-success"
-                                  [disabled]="editExpressionBesoinForm.invalid"
-                                  (click)="updateExpressionBesoin()"
-                                  data-bs-dismiss="modal">Edit
+                          <button type="submit" class="btn btn-success" [disabled]="editExpressionBesoinForm.invalid" (click)="updateExpressionBesoin()" data-bs-dismiss="modal">Edit
                           </button>
                           <a class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
                         </form>
