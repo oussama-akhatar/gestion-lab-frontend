@@ -66,12 +66,6 @@
                                value="{{expressionBesoin.description}}"
                                formControlName="description">
                       </div>
-<!--                      <div class="mb-3">-->
-<!--                        <label class="form-label">Date de Demande</label>-->
-<!--                        <input type="date" class="form-control" name="dateDemande"-->
-<!--                               value="{{expressionBesoin.dateDemande}}"-->
-<!--                               formControlName="dateDemande">-->
-<!--                      </div>-->
                       <div class="mb-3">
                         <label class="form-label">Validation du Directeur ?</label>
                         <input type="checkbox" class="form-control form-check-input"
@@ -79,14 +73,14 @@
                                value="{{expressionBesoin.validerDirecteur}}"
                                formControlName="validerDirecteur">
                       </div>
-<!--                      <div class="form-group mb-3">-->
-<!--                        <label>Membre :</label>-->
-<!--                        <select class="form-select" formControlName="membre">-->
-<!--                          <option *ngFor="let membre of membres" [ngValue]="membre" [selected]="membre.id === editExpressionBesoinForm.get('membre').value?.id">-->
-<!--                            {{ membre.nom }} {{ membre.prenom }}-->
-<!--                          </option>-->
-<!--                        </select>-->
-<!--                      </div>-->
+                      <div class="form-group mb-3">
+                        <label for="montant" class="form-check-label">Montant</label>
+                        <input type="text" id="montant" formControlName="montant" class="form-control">
+                      </div>
+                      <div class="form-group mb-3">
+                        <label for="montantEffectif" class="form-check-label">Montant Effectif</label>
+                        <input type="text" id="montantEffectif" formControlName="montantEffectif" class="form-control">
+                      </div>
                       <div class="form-group mb-3">
                         <label>Responsable :</label>
                         <select class="form-select" formControlName="responsable">
@@ -97,17 +91,6 @@
                           </option>
                         </select>
                       </div>
-<!--                      <div class="form-group mb-3">-->
-<!--                        <label>Type de Besoins :</label>-->
-<!--                        <select class="form-select" formControlName="typeBesoin">-->
-<!--                          <option *ngFor="let typeBesoin of typeBesoins"-->
-<!--                                  [ngValue]="typeBesoin"-->
-<!--                                  [selected]="typeBesoin.id == editExpressionBesoinForm.get('typeBesoin').value?.id">-->
-<!--                            {{ typeBesoin.description }}-->
-<!--                          </option>-->
-<!--                        </select>-->
-<!--                      </div>-->
-
                       <button type="submit" class="btn btn-success"
                               [disabled]="editExpressionBesoinForm.invalid"
                               (click)="updateExpressionBesoin()"
@@ -144,9 +127,16 @@
           </div>
           <div class="form-group mb-3">
             <label for="validerDirecteur" class="form-check-label">Validation du directeur</label>
-            <input type="checkbox" id="validerDirecteur" formControlName="validerDirecteur"
-                   class="form-control form-check-input">
+            <input type="checkbox" id="validerDirecteur" formControlName="validerDirecteur" class="form-control">
           </div>
+<!--          <div class="form-group mb-3">-->
+<!--            <label for="montant" class="form-check-label">Montant</label>-->
+<!--            <input type="text" id="montant" formControlName="montant" class="form-control form-check-input">-->
+<!--          </div>-->
+<!--          <div class="form-group mb-3">-->
+<!--            <label for="montantEffectif" class="form-check-label">Montant Effectif</label>-->
+<!--            <input type="text" id="montantEffectif" formControlName="montantEffectif" class="form-control">-->
+<!--          </div>-->
           <div class="form-group mb-3">
             <label for="membre">Membre</label>
             <select id="membre" formControlName="membre" class="form-select">

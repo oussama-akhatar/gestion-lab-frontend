@@ -45,6 +45,8 @@ export class ExpressionBesoinComponent implements OnInit {
       validerDirecteur: [false, Validators.required],
       dateDemande: [null, Validators.required],
       membre: [null, Validators.required],
+      montant: [null,Validators.required],
+      montantEffectif: [null,Validators.required],
       responsable: [null, Validators.required],
       typeBesoin: [null, Validators.required]
     });
@@ -55,6 +57,8 @@ export class ExpressionBesoinComponent implements OnInit {
       dateValidation: [new Date(), Validators.required],
       validerDirecteur: [null, Validators.required],
       membre: [null, Validators.required],
+      montant: [null,Validators.required],
+      montantEffectif: [null,Validators.required],
       responsable: [null, Validators.required],
       typeBesoin: [null, Validators.required]
     });
@@ -140,6 +144,7 @@ export class ExpressionBesoinComponent implements OnInit {
       description: expressionBesoin.description,
       dateDemande: expressionBesoin.dateDemande,
       dateValidation: new Date(),
+
       validerDirecteur: expressionBesoin.validerDirecteur,
       membre: expressionBesoin.membre,
       responsable: expressionBesoin.responsable,
@@ -153,6 +158,8 @@ export class ExpressionBesoinComponent implements OnInit {
       description: this.editExpressionBesoinForm.value.description,
       dateDemande: this.editExpressionBesoinForm.value.dateDemande,
       dateValidation: new Date(),
+      montant: this.editExpressionBesoinForm.value.montant,
+      montantEffectif: this.editExpressionBesoinForm.value.montantEffectif,
       validerDirecteur: this.editExpressionBesoinForm.value.validerDirecteur,
       membre: {
         id: this.editExpressionBesoinForm.value.membre.id

@@ -17,7 +17,7 @@
       <tr *ngFor="let dotationUcaRech of dotationUcaReches">
         <th scope="row">{{dotationUcaRech.id}}</th>
         <td>{{dotationUcaRech.annee}}</td>
-        <td>{{dotationUcaRech.dotateurBase}}</td>
+        <td>{{dotationUcaRech.dotateurBase | currency: 'USD'}}</td>
         <td>
           <a class="text-success h5" href="#{{dotationUcaRech.id}}" data-bs-toggle="modal" (click)="loadDotationUcaRechFormData(dotationUcaRech)" ><i class="bi bi-pen"></i></a>
           <div class="modal fade" id="{{dotationUcaRech.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

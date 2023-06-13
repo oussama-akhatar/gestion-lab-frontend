@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Membre } from '../models/membre.model';
+import {Laboratoire} from "../models/laboratoire.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,14 @@ export class MembreService {
 
   getAllMembres(): Observable<Membre[]> {
     return this.http.get<Membre[]>(`${this.baseUrl}/all`);
+  }
+
+  getAllMembresLabo(id: number): Observable<Membre[]> {
+    return this.http.get<Membre[]>(`${this.baseUrl}/all/`+id);
+  }
+
+  getAllDirecteurs(): Observable<Membre[]> {
+    return this.http.get<Membre[]>(`${this.baseUrl}/allDirecteurs`);
   }
 
   addMembre(membre: Membre): Observable<Membre> {

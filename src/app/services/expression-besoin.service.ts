@@ -29,6 +29,10 @@ export class ExpressionBesoinService {
     return this.http.put<ExpressionBesoin>(`${this.baseUrl}/update`, expressionBesoin);
   }
 
+  validerExpressionBesoin(expressionBesoin: ExpressionBesoin) {
+    return this.http.put(`${this.baseUrl}/valider`, expressionBesoin);
+  }
+
   deleteExpressionBesoin(id: number) {
     return this.http.delete(`${this.baseUrl}/delete/${id}`);
   }

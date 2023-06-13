@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   public password: string;
   public membres: Membre[];
   public responsables: Responsable[];
+  public directeurs: Membre[];
   public messageEmail: boolean = true;
   public messagePassword: boolean = true;
 
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
     this.initLoginForm();
     this.getAllMembres();
     this.getAllResponsables();
+    this.getAllDirecteurs();
   }
 
   initLoginForm() {
@@ -60,10 +62,36 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  getAllDirecteurs() {
+    this.membreService.getAllDirecteurs().subscribe((directeurs) => {
+      this.directeurs = directeurs;
+      console.log(this.directeurs);
+    })
+  }
+
   onSubmit() {
     if (this.loginForm.valid) {
       this.email = this.loginForm.value.email;
       this.password = this.loginForm.value.password;
+      // ===========================================================
+      for (let directeur of this.directeurs) {
+        if (this.email == directeur.email) {
+          this.messageEmail = true;
+          if (this.password == directeur.password) {
+            this.messagePassword = true;
+            sessionStorage.setItem('role', 'directeur');
+            sessionStorage.setItem('email', directeur.email);
+            // window.location.reload();
+            window.location.href = "/dashboard-directeur";
+            return;
+          } else {
+            this.messagePassword = false;
+          }
+        } else {
+          this.messageEmail = false;
+        }
+      }
+      // ===========================================================
       for (let membre of this.membres) {
         if (this.email == membre.email) {
           this.messageEmail = true;
@@ -81,6 +109,7 @@ export class LoginComponent implements OnInit {
           this.messageEmail = false;
         }
       }
+      // ===========================================================
       for (let respo of this.responsables) {
         if (this.email == respo.email) {
           this.messageEmail = true;
@@ -88,7 +117,6 @@ export class LoginComponent implements OnInit {
             this.messagePassword = true;
             sessionStorage.setItem('role', 'respo');
             sessionStorage.setItem('email', respo.email);
-            // window.location.reload();
             window.location.href = "/dashboard-responsable";
             return;
           } else {
@@ -98,6 +126,7 @@ export class LoginComponent implements OnInit {
           this.messageEmail = false;
         }
       }
+      // ===========================================================
     }
   }
 
