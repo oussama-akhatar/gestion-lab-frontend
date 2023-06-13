@@ -51,6 +51,14 @@
                         <input type="checkbox" class="form-control form-check-input" name="responsableProjet" value="{{projetMembre.responsableProjet}}" formControlName="responsableProjet">
                       </div>
                       <div class="form-group mb-3">
+                        <label for="membre">Membre</label>
+                        <select formControlName="membre" class="form-select">
+                          <option *ngFor="let membre of membres" [ngValue]="membre" [selected]="membre.id === editProjetMembreForm.get('membre').value?.id">
+                            {{ membre.nom }} {{ membre.prenom }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="form-group mb-3">
                         <label>Projet :</label>
                         <select class="form-select" formControlName="projet">
                           <option *ngFor="let projet of projets" [ngValue]="projet" [selected]="projet.id === editProjetMembreForm.get('projet').value?.id">
@@ -97,7 +105,7 @@
             <label for="membre">Membre</label>
             <select id="membre" formControlName="membre" class="form-select">
               <option *ngFor="let membre of membres" [ngValue]="membre">
-                {{ membre.nom }}
+                {{ membre.nom }} {{ membre.prenom }}
               </option>
             </select>
           </div>
@@ -109,7 +117,7 @@
               </option>
             </select>
           </div>
-          <button type="submit" [disabled]="newProjetMembreForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">Add Membre</button>
+          <button type="submit" [disabled]="newProjetMembreForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">Associer</button>
         </form>
       </div>
     </div>

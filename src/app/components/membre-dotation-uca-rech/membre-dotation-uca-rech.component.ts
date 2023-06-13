@@ -108,11 +108,15 @@ export class MembreDotationUcaRechComponent implements OnInit{
   }
 
   loadMembreDotationFormData(membreDotationUcaRech: MembreDotationUcaRech) {
+    this.getAllDotationUcaRechs();
+    this.getAllMembres();
+    const selectedMembre = this.membres.find(membre => membre.id === membreDotationUcaRech.membre.id);
+    const selectedDotationUCARech = this.dotationUcaRechs.find(dotation => dotation.id === membreDotationUcaRech.dotationUCARech.id);
     this.editMembreDotationForm.patchValue({
       id: membreDotationUcaRech.id,
       dotationMembre: membreDotationUcaRech.dotationMembre,
-      membre: membreDotationUcaRech.membre,
-      dotationUCARech: membreDotationUcaRech.dotationUCARech
+      membre: selectedMembre,
+      dotationUCARech: selectedDotationUCARech
     });
   }
 

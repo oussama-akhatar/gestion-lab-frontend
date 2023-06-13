@@ -30,6 +30,7 @@ export class ResponsableComponent implements OnInit {
       prenom: [null, Validators.required],
       dateNaissance: [new Date(), Validators.required],
       email: [null, [Validators.required, Validators.email]],
+      password: [null, Validators.required],
       telephone: [null, Validators.required],
       typeResponsabilite: ['RAF', Validators.required]
     });
@@ -39,6 +40,7 @@ export class ResponsableComponent implements OnInit {
       prenom: [null, Validators.required],
       dateNaissance: [new Date(), Validators.required],
       email: [null, [Validators.required, Validators.email]],
+      password: [null, Validators.required],
       telephone: [null, Validators.required],
       typeResponsabilite: [null, Validators.required]
     });
@@ -49,7 +51,7 @@ export class ResponsableComponent implements OnInit {
       (responsables: Responsable[]) => {
         this.responsables = responsables;
         console.log(responsables);
-        
+
       },
       (error: any) => {
         console.error(error);
@@ -68,6 +70,7 @@ export class ResponsableComponent implements OnInit {
       prenom: this.newResponsableForm.value.prenom,
       dateNaissance: this.newResponsableForm.value.dateNaissance,
       email: this.newResponsableForm.value.email,
+      password: this.newResponsableForm.value.password,
       telephone: this.newResponsableForm.value.telephone,
       typeResponsabilite: this.newResponsableForm.value.typeResponsabilite
     };
@@ -92,6 +95,7 @@ export class ResponsableComponent implements OnInit {
       prenom: responsable.prenom,
       dateNaissance: responsable.dateNaissance,
       email: responsable.email,
+      password: responsable.password,
       telephone: responsable.telephone,
       typeResponsabilite: responsable.typeResponsabilite
     });
@@ -104,6 +108,7 @@ export class ResponsableComponent implements OnInit {
       prenom: this.editResponsableForm.value.prenom,
       dateNaissance: this.editResponsableForm.value.dateNaissance,
       email: this.editResponsableForm.value.email,
+      password: this.editResponsableForm.value.password,
       telephone: this.editResponsableForm.value.telephone,
       typeResponsabilite: this.editResponsableForm.value.typeResponsabilite
     }

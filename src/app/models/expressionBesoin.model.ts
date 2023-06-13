@@ -4,9 +4,13 @@ import { TypeBesoin } from "./typeBesoin.model";
 
 export interface ExpressionBesoin {
     id?: number;
-    description: string;
-    validerDirecteur: boolean;
-    membre: Membre;
-    responsable: Responsable;
-    typeBesoin: TypeBesoin;
+    description?: string;
+    validerDirecteur?: boolean;
+    membre?: Membre;
+    responsable?: Responsable;
+    typeBesoin?: TypeBesoin;
+    montant?: number;
+    montantEffectif?: number;
+    dateDemande?: Date;
+    dateValidation?: Date;
 }
