@@ -6,33 +6,33 @@
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Prenom</th>
-          <th>Date Naissance</th>
-          <th>Email</th>
-          <th>Password</th>
-          <th>Telephone</th>
-          <th>isDirector</th>
-          <th>Laboratoire</th>
-        </tr>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Date Naissance</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Telephone</th>
+            <th>isDirector</th>
+            <th>Laboratoire</th>
+          </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>{{ membre?.id }}</td>
-          <td>{{ membre?.nom }}</td>
-          <td>{{ membre?.prenom }}</td>
-          <td>{{ membre?.dateNaissance | date : 'dd/MM/yyyy' }}</td>
-          <td>{{ membre?.email }}</td>
-          <td>{{ membre?.password }}</td>
-          <td>{{ membre?.telephone }}</td>
-          <td class="ps-4">
-            <i class="bi bi-check-circle-fill text-success h5" *ngIf="membre?.directeur"></i>
-            <i class="bi bi bi-x-circle-fill text-danger h5" *ngIf="!membre?.directeur"></i>
-          </td>
-          <td>{{ membre?.laboratoire.intitule }}</td>
-        </tr>
+          <tr>
+            <td>{{ membre?.id }}</td>
+            <td>{{ membre?.nom }}</td>
+            <td>{{ membre?.prenom }}</td>
+            <td>{{ membre?.dateNaissance | date : 'dd/MM/yyyy' }}</td>
+            <td>{{ membre?.email }}</td>
+            <td>{{ membre?.password }}</td>
+            <td>{{ membre?.telephone }}</td>
+            <td class="ps-4">
+              <i class="bi bi-check-circle-fill text-success h5" *ngIf="membre?.directeur"></i>
+              <i class="bi bi bi-x-circle-fill text-danger h5" *ngIf="!membre?.directeur"></i>
+            </td>
+            <td>{{ membre?.laboratoire.intitule }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -48,34 +48,35 @@
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
-        <tr>
-          <th>ID</th>
-          <th>Description</th>
-          <th>Type de Besoin</th>
-          <th>Montant Aprox</th>
-          <th>Date de demande</th>
-          <th>Date de validation</th>
-          <th>Valide?</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Type de Besoin</th>
+            <th>Montant Aprox</th>
+            <th>Date de demande</th>
+            <th>Date de validation</th>
+            <th>Valide?</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let exp of membre?.expressionBesoins">
-          <td>{{ exp.id }}</td>
-          <td>{{ exp.description }}</td>
-          <td>{{ exp.typeBesoin.description }}</td>
-          <td>{{ exp.montant | currency: 'USD' }}</td>
-          <td *ngIf="exp.dateDemande != null">{{ exp.dateDemande }}</td>
-          <td *ngIf="exp.dateDemande == null">-</td>
-          <td *ngIf="exp.dateValidation != null">{{ exp.dateValidation }}</td>
-          <td *ngIf="exp.dateValidation == null">-</td>
-          <td class="ps-4">
-            <i class="bi bi-check-circle-fill text-success h5" *ngIf="exp.validerDirecteur"></i>
-            <i class="bi bi bi-x-circle-fill text-danger h5" *ngIf="!exp.validerDirecteur"></i>
-            <i class="bi bi bi-x-circle-fill text-warning h5" *ngIf="exp.validerDirecteur==null"></i>
-          </td>
-          <td><a class="text-danger h5 ms-2" (click)="deleteExpressionBesoin(exp.id)"><i class="bi bi-trash3"></i></a></td>
-        </tr>
+          <tr *ngFor="let exp of membre?.expressionBesoins">
+            <td>{{ exp.id }}</td>
+            <td>{{ exp.description }}</td>
+            <td>{{ exp.typeBesoin.description }}</td>
+            <td>{{ exp.montant | currency: 'USD' }}</td>
+            <td *ngIf="exp.dateDemande != null">{{ exp.dateDemande | date : 'dd/MM/yyyy' }}</td>
+            <td *ngIf="exp.dateDemande == null">-</td>
+            <td *ngIf="exp.dateValidation != null">{{ exp.dateValidation | date : 'dd/MM/yyyy' }}</td>
+            <td *ngIf="exp.dateValidation == null">-</td>
+            <td class="ps-4">
+              <i class="bi bi-check-circle-fill text-success h5" *ngIf="exp.validerDirecteur"></i>
+              <i class="bi bi bi-x-circle-fill text-danger h5" *ngIf="!exp.validerDirecteur"></i>
+              <i class="bi bi bi-x-circle-fill text-warning h5" *ngIf="exp.validerDirecteur==null"></i>
+            </td>
+            <td><a class="text-danger h5 ms-2" (click)="deleteExpressionBesoin(exp.id)"><i class="bi bi-trash3"></i></a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -108,7 +109,8 @@
               </option>
             </select>
           </div>
-          <button type="submit" [disabled]="newExpressionBesoinForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">Add Expression Besoin</button>
+          <button type="submit" [disabled]="newExpressionBesoinForm.invalid" class="btn btn-primary"
+            data-bs-dismiss="modal">Add Expression Besoin</button>
         </form>
       </div>
     </div>

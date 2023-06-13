@@ -31,15 +31,19 @@
                         <td *ngIf="responsable.typeResponsabilite==='RAF'">Responsable Affiares Financieres</td>
                         <td *ngIf="responsable.typeResponsabilite==='RM'">Responsable Marches</td>
                         <td>
-                            <a class="text-success h5" href="#{{responsable.id}}" data-bs-toggle="modal" (click)="loadResponsableFormData(responsable)">
-                              <i class="bi bi-pen"></i>
+                            <a class="text-success h5" href="#{{responsable.id}}" data-bs-toggle="modal"
+                                (click)="loadResponsableFormData(responsable)">
+                                <i class="bi bi-pen"></i>
                             </a>
-                            <div class="modal fade" id="{{responsable.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="{{responsable.id}}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Responsable {{responsable.id}}</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Responsable
+                                                {{responsable.id}}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form [formGroup]="editResponsableForm">
@@ -62,7 +66,8 @@
                                                     <label class="form-label">Email</label>
                                                     <input type="text" class="form-control" name="email"
                                                         value="{{responsable.email}}" formControlName="email">
-                                                </div><div class="mb-3">
+                                                </div>
+                                                <div class="mb-3">
                                                     <label class="form-label">Password</label>
                                                     <input type="password" class="form-control" name="password"
                                                         value="{{responsable.password}}" formControlName="password">
@@ -80,19 +85,27 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="typeResponsabilite">Type</label>
-                                                    <select id="typeResponsabilite" name="typeResponsabilite" class="form-select" formControlName="typeResponsabilite">
-                                                        <option value="RAF" [selected]="responsable.typeResponsabilite === 'RAF'">Responsable Affaires Financieres</option>
-                                                        <option value="RM" [selected]="responsable.typeResponsabilite === 'RM'">Responsable Marche</option>
+                                                    <select id="typeResponsabilite" name="typeResponsabilite"
+                                                        class="form-select" formControlName="typeResponsabilite">
+                                                        <option value="RAF"
+                                                            [selected]="responsable.typeResponsabilite === 'RAF'">
+                                                            Responsable Affaires Financieres</option>
+                                                        <option value="RM"
+                                                            [selected]="responsable.typeResponsabilite === 'RM'">
+                                                            Responsable Marche</option>
                                                     </select>
                                                 </div>
-                                                <button type="submit" class="btn btn-success" [disabled]="editResponsableForm.invalid" (click)="updateResponsable()" data-bs-dismiss="modal">Edit</button>
+                                                <button type="submit" class="btn btn-success"
+                                                    [disabled]="editResponsableForm.invalid"
+                                                    (click)="updateResponsable()" data-bs-dismiss="modal">Edit</button>
                                                 <a class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <a class="text-danger h5 ms-2" (click)="deleteResponsable(responsable.id)"><i class="bi bi-trash3"></i></a>
+                            <a class="text-danger h5 ms-2" (click)="deleteResponsable(responsable.id)"><i
+                                    class="bi bi-trash3"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -126,7 +139,8 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" formControlName="email" class="form-control">
-                    </div><div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" formControlName="password" class="form-control">
                     </div>
@@ -136,12 +150,14 @@
                     </div>
                     <div class="form-group">
                         <label>Type</label>
-                        <select name="typeResponsabilite" class="form-select" formControlName="typeResponsabilite" required>
+                        <select name="typeResponsabilite" class="form-select" formControlName="typeResponsabilite"
+                            required>
                             <option value="RAF">Responsable Affaire Financiere</option>
                             <option value="RM">Responsable Marche</option>
                         </select>
                     </div>
-                    <button type="submit" [disabled]="newResponsableForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">Add Responsable</button>
+                    <button type="submit" [disabled]="newResponsableForm.invalid" class="btn btn-primary"
+                        data-bs-dismiss="modal">Add Responsable</button>
                 </form>
             </div>
         </div>

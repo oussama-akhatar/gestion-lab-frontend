@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {SessionStorageService} from "ngx-webstorage";
-import {MembreService} from "../../services/membre.service";
-import {Membre} from "../../models/membre.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TypeBesoin} from "../../models/typeBesoin.model";
-import {TypeBesoinService} from "../../services/type-besoin.service";
-import {ExpressionBesoinService} from "../../services/expression-besoin.service";
-import {ExpressionBesoin} from "../../models/expressionBesoin.model";
+import { Component, OnInit } from '@angular/core';
+import { SessionStorageService } from "ngx-webstorage";
+import { MembreService } from "../../services/membre.service";
+import { Membre } from "../../models/membre.model";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { TypeBesoin } from "../../models/typeBesoin.model";
+import { TypeBesoinService } from "../../services/type-besoin.service";
+import { ExpressionBesoinService } from "../../services/expression-besoin.service";
+import { ExpressionBesoin } from "../../models/expressionBesoin.model";
 
 @Component({
   selector: 'app-dashborard-membre',
@@ -21,8 +21,12 @@ export class DashborardMembreComponent implements OnInit {
   newExpressionBesoinForm: FormGroup;
   typeBesoins: TypeBesoin[] = [];
 
-  constructor(private membreService: MembreService, private fb : FormBuilder, private typeBesoinService: TypeBesoinService, private expressionBesoinService: ExpressionBesoinService) {
-  }
+  constructor(
+    private membreService: MembreService,
+    private fb: FormBuilder,
+    private typeBesoinService: TypeBesoinService,
+    private expressionBesoinService: ExpressionBesoinService
+  ) { }
 
   ngOnInit(): void {
     this.getAllMembres();
@@ -53,7 +57,7 @@ export class DashborardMembreComponent implements OnInit {
           if (this.email == membre.email) {
             this.membre = membre;
             console.log(this.membre);
-          }else {
+          } else {
             console.log("dd")
           }
         }
@@ -62,11 +66,11 @@ export class DashborardMembreComponent implements OnInit {
 
 
   addExpressionBesoin() {
-    let expressionBesoinAdded : ExpressionBesoin = {
+    let expressionBesoinAdded: ExpressionBesoin = {
       id: null,
       description: this.newExpressionBesoinForm.value.description,
       validerDirecteur: null,
-      responsable:null,
+      responsable: null,
       dateValidation: null,
       dateDemande: new Date(),
       montant: this.newExpressionBesoinForm.value.montant,
@@ -80,7 +84,7 @@ export class DashborardMembreComponent implements OnInit {
     }
 
     console.log(expressionBesoinAdded);
-    this.expressionBesoinService.addExpressionBesoin(expressionBesoinAdded).subscribe((expressionBesoinAdded: ExpressionBesoin) =>{
+    this.expressionBesoinService.addExpressionBesoin(expressionBesoinAdded).subscribe((expressionBesoinAdded: ExpressionBesoin) => {
       console.log(expressionBesoinAdded);
       this.getAllMembres();
     });

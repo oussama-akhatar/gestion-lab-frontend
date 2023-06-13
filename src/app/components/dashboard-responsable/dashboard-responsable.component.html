@@ -1,1 +1,118 @@
-<p>dashboard-responsable works!</p>
+<div class="card m-5">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <h1>Welcome {{responsable?.nom}} {{responsable?.prenom}}</h1>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Date Naissance</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Responsabilité</th>
+                        <th>Telephone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ responsable?.id }}</td>
+                        <td>{{ responsable?.nom }}</td>
+                        <td>{{ responsable?.prenom }}</td>
+                        <td>{{ responsable?.dateNaissance | date : 'dd/MM/yyyy' }}</td>
+                        <td>{{ responsable?.email }}</td>
+                        <td>{{ responsable?.password }}</td>
+                        <td *ngIf="responsable?.typeResponsabilite==='RAF'">Responsable Affiares Financieres</td>
+                        <td *ngIf="responsable?.typeResponsabilite==='RM'">Responsable Marches</td>
+                        <td>{{ responsable?.telephone }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card m-5">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <h1>Liste des Expressions de Besoins</h1>
+    </div>
+    <div class="card-body">
+        <div *ngIf="expressionBesoins" class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Membre</th>
+                        <th>Montant</th>
+                        <th>Montant Effectif</th>
+                        <th>Date Demanede</th>
+                        <th>Date Validation</th>
+                        <th>Type de besoin</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let expressionBesoin of expressionBesoins">
+                        <td>{{ expressionBesoin.id }}</td>
+                        <td>{{ expressionBesoin.description }}</td>
+                        <td>{{ expressionBesoin.membre.nom}} {{ expressionBesoin.membre.prenom}}</td>
+                        <td>{{expressionBesoin.montant | currency:'USD'}}</td>
+                        <td>{{expressionBesoin.montantEffectif | currency:'USD'}}</td>
+                        <td *ngIf="expressionBesoin.dateDemande != null">{{expressionBesoin.dateDemande | date :
+                            'dd/MM/yyyy'}}</td>
+                        <td *ngIf="expressionBesoin.dateDemande == null">-</td>
+                        <td *ngIf="expressionBesoin.dateValidation != null">{{expressionBesoin.dateValidation | date :
+                            'dd/MM/yyyy'}}</td>
+                        <td *ngIf="expressionBesoin.dateValidation == null">-</td>
+                        <td>{{ expressionBesoin.typeBesoin.description }}</td>
+                        <td>
+                            <a class="text-success h5" href="#{{expressionBesoin.id}}" data-bs-toggle="modal"
+                                (click)="loadEBMontantEffectifFormData(expressionBesoin)"><i class="bi bi-pen"></i></a>
+                            <div class="modal fade" id="{{expressionBesoin.id}}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Expression de
+                                                besoins
+                                                {{expressionBesoin.id}}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form [formGroup]="addEBMontantEffectifForm">
+                                                <div class="mb-3 visually-hidden">
+                                                    <label class="form-label">ID</label>
+                                                    <input type="text" class="form-control" name="id"
+                                                        value="{{expressionBesoin.id}}" formControlName="id">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Montant Effectif</label>
+                                                    <input type="number" class="form-control" name="montantEffectif"
+                                                        value="{{expressionBesoin.montantEffectif}}"
+                                                        formControlName="montantEffectif">
+                                                </div>
+
+                                                <button type="submit" class="btn btn-success"
+                                                    [disabled]="addEBMontantEffectifForm.invalid"
+                                                    (click)="addEBMontantEffectif()" data-bs-dismiss="modal">Edit
+                                                </button>
+                                                <a class="btn btn-secondary ms-2" data-bs-dismiss="modal">Back</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <a class="text-danger h5 ms-2" (click)="deleteExpressionBesoin(expressionBesoin.id)"><i
+                                    class="bi bi-trash3"></i></a> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

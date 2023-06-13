@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ExpressionBesoin } from '../models/expressionBesoin.model';
+import { Responsable } from '../models/responsable.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class ExpressionBesoinService {
 
   getAllExpressionBesoins(): Observable<ExpressionBesoin[]> {
     return this.http.get<ExpressionBesoin[]>(`${this.baseUrl}/all`);
+  }
+
+  getEBsByResponsable(id: number): Observable<ExpressionBesoin[]> {
+    return this.http.get<ExpressionBesoin[]>(`${this.baseUrl}/all/resp/${id}`);
   }
 
   addExpressionBesoin(expressionBesoin: ExpressionBesoin): Observable<ExpressionBesoin> {

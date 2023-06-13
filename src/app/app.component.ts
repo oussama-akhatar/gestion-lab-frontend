@@ -16,7 +16,7 @@ export class AppComponent {
   ngOnInit(): void {
     // window.location.reload();
     this.sessionValue = sessionStorage.getItem('role');
-    console.log(this.sessionValue);
+    // console.log(this.sessionValue);
   }
 
   logout() {
