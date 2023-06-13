@@ -10,9 +10,9 @@ import { Etablissement } from 'src/app/models/etablissement.model';
 })
 export class EtablissementComponent implements OnInit {
 
-  public etablissements: Etablissement[] = [];
   public newEtablissementForm: FormGroup;
   public editEtablissementForm: FormGroup;
+  etablissements: Etablissement[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -40,12 +40,13 @@ export class EtablissementComponent implements OnInit {
     );
   }
 
+
   saveEtablissement() {
     let etablissement: Etablissement = this.newEtablissementForm.value;
     this.etablissementService.addEtablissement(etablissement).subscribe({
       next: value => {
         console.log(value);
-        this.getEtablissements()
+        this.getEtablissements();
       },
       error: err => {
         console.log(err);

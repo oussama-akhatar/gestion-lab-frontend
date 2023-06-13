@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -16,7 +16,7 @@ export class EtablissementService {
   public getAllEtablissements(): Observable<Etablissement[]> {
     return this.http.get<Etablissement[]>(`${this.baseUrl}/all`);
   }
-
+  
   public addEtablissement(etablissement: Etablissement): Observable<Etablissement> {
     return this.http.post<Etablissement>(`${this.baseUrl}/add`, etablissement);
   }
