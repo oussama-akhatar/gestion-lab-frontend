@@ -36,6 +36,7 @@ export class MembreComponent implements OnInit {
       prenom: [null, Validators.required],
       dateNaissance: [new Date(), Validators.required],
       email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]],
       telephone: [null, Validators.required],
       directeur: [false, Validators.required],
       laboratoire: [null, Validators.required]
@@ -46,6 +47,7 @@ export class MembreComponent implements OnInit {
       prenom: [null, Validators.required],
       dateNaissance: [new Date(), Validators.required],
       email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]],
       telephone: [null, Validators.required],
       directeur: [false, Validators.required],
       laboratoire: [null, Validators.required]
@@ -56,9 +58,7 @@ export class MembreComponent implements OnInit {
     this.membreService.getAllMembres().subscribe(
       (Membres: Membre[]) => {
         this.membres = Membres;
-      },
-      (error: any) => {
-        console.error(error);
+        console.log(this.membres);
       }
     );
   }
@@ -85,6 +85,7 @@ export class MembreComponent implements OnInit {
       prenom: this.newMembreForm.value.prenom,
       dateNaissance: this.newMembreForm.value.dateNaissance,
       email: this.newMembreForm.value.email,
+      password: this.newMembreForm.value.password,
       telephone: this.newMembreForm.value.telephone,
       directeur: this.newMembreForm.value.directeur,
       laboratoire: {
@@ -112,6 +113,7 @@ export class MembreComponent implements OnInit {
       prenom: membre.prenom,
       dateNaissance: membre.dateNaissance,
       email: membre.email,
+      password: membre.password,
       telephone: membre.telephone,
       directeur: membre.directeur,
       laboratoire: membre.laboratoire
@@ -121,10 +123,11 @@ export class MembreComponent implements OnInit {
   updateMembre(): void {
     const updatedMembre: Membre = {
       id: this.editMembreForm.value.id,
-      nom: this.editMembreForm.value.nom,
+      nom: this.editMembreForm.value.nom.toUpperCase(),
       prenom: this.editMembreForm.value.prenom,
       dateNaissance: this.editMembreForm.value.dateNaissance,
       email: this.editMembreForm.value.email,
+      password: this.editMembreForm.value.password,
       telephone: this.editMembreForm.value.telephone,
       directeur: this.editMembreForm.value.directeur,
       laboratoire: {

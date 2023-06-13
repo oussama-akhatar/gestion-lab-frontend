@@ -43,6 +43,7 @@ export class ExpressionBesoinComponent implements OnInit {
     this.newExpressionBesoinForm = this.formBuilder.group({
       description: [null, Validators.required],
       validerDirecteur: [false, Validators.required],
+      dateDemande: [null, Validators.required],
       membre: [null, Validators.required],
       responsable: [null, Validators.required],
       typeBesoin: [null, Validators.required]
@@ -50,6 +51,8 @@ export class ExpressionBesoinComponent implements OnInit {
     this.editExpressionBesoinForm = this.formBuilder.group({
       id: [null, Validators.required],
       description: [null, Validators.required],
+      dateDemande: [null, Validators.required],
+      dateValidation: [new Date(), Validators.required],
       validerDirecteur: [null, Validators.required],
       membre: [null, Validators.required],
       responsable: [null, Validators.required],
@@ -102,6 +105,7 @@ export class ExpressionBesoinComponent implements OnInit {
     const expressionBesoinData: ExpressionBesoin = {
       description: this.newExpressionBesoinForm.value.description,
       validerDirecteur: this.newExpressionBesoinForm.value.validerDirecteur,
+      dateDemande: this.newExpressionBesoinForm.value.dateDemande,
       membre: {
         id: this.newExpressionBesoinForm.value.membre.id
       },
@@ -128,9 +132,14 @@ export class ExpressionBesoinComponent implements OnInit {
   }
 
   loadExpressionBesoinFormData(expressionBesoin: ExpressionBesoin) {
+    this.loadMembres();
+    this.loadTypeBesoins();
+    this.loadResponsables();
     this.editExpressionBesoinForm.patchValue({
       id: expressionBesoin.id,
       description: expressionBesoin.description,
+      dateDemande: expressionBesoin.dateDemande,
+      dateValidation: new Date(),
       validerDirecteur: expressionBesoin.validerDirecteur,
       membre: expressionBesoin.membre,
       responsable: expressionBesoin.responsable,
@@ -142,18 +151,28 @@ export class ExpressionBesoinComponent implements OnInit {
     const updatedExpressionBesoin: ExpressionBesoin = {
       id: this.editExpressionBesoinForm.value.id,
       description: this.editExpressionBesoinForm.value.description,
+      dateDemande: this.editExpressionBesoinForm.value.dateDemande,
+      dateValidation: new Date(),
       validerDirecteur: this.editExpressionBesoinForm.value.validerDirecteur,
-      membre: this.editExpressionBesoinForm.value.membre,
-      responsable: this.editExpressionBesoinForm.value.responsable,
-      typeBesoin: this.editExpressionBesoinForm.value.typeBesoin
+      membre: {
+        id: this.editExpressionBesoinForm.value.membre.id
+      },
+      responsable: {
+        id: this.editExpressionBesoinForm.value.responsable.id
+      },
+      typeBesoin: {
+        id: this.editExpressionBesoinForm.value.typeBesoin.id
+      }
     }
+
+    console.log(updatedExpressionBesoin);
 
     this.expressionBesoinService.updateExpressionBesoin(updatedExpressionBesoin).subscribe(
       (updatedExpressionBesoin: ExpressionBesoin) => {
         this.getAllExpressionBesoins();
         console.log(updatedExpressionBesoin);
       }
-    )
+    );
   }
 
   deleteExpressionBesoin(id: number) {

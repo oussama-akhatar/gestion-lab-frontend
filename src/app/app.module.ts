@@ -14,6 +14,10 @@ import { TypeBesoinComponent } from './components/type-besoin/type-besoin.compon
 import { DotationUcaRechComponent } from './components/dotation-uca-rech/dotation-uca-rech.component';
 import { ProjetComponent } from './components/projet/projet.component';
 import { MembreDotationUcaRechComponent } from './components/membre-dotation-uca-rech/membre-dotation-uca-rech.component';
+import { LoginComponent } from './components/login/login.component';
+import { DashborardMembreComponent } from './components/dashborard-membre/dashborard-membre.component';
+import {LocalStorageService, SessionStorageService} from "ngx-webstorage";
+import { DashboardResponsableComponent } from './components/dashboard-responsable/dashboard-responsable.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,10 @@ import { MembreDotationUcaRechComponent } from './components/membre-dotation-uca
     ExpressionBesoinComponent,
     TypeBesoinComponent,
     DotationUcaRechComponent,
-    MembreDotationUcaRechComponent
+    MembreDotationUcaRechComponent,
+    LoginComponent,
+    DashborardMembreComponent,
+    DashboardResponsableComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,7 @@ import { MembreDotationUcaRechComponent } from './components/membre-dotation-uca
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [SessionStorageService,LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -44,7 +44,7 @@
                       <div class="form-group mb-3">
                         <label>Membres :</label>
                         <select class="form-select" formControlName="membre">
-                          <option *ngFor="let membre of membres" [ngValue]="membre" [selected]="membre.id === editMembreDotationForm.get('membre').value?.id">
+                          <option *ngFor="let membre of membres" [ngValue]="membre" [selected]="membre.id === editMembreDotationForm.value.membre?.id">
                             {{ membre.nom }} {{ membre.prenom }}
                           </option>
                         </select>
@@ -52,7 +52,7 @@
                       <div class="form-group mb-3">
                         <label>Dotation UCA Rech :</label>
                         <select class="form-select" formControlName="dotationUCARech">
-                          <option *ngFor="let dotationUcaRech of dotationUcaRechs" [ngValue]="dotationUcaRech" [selected]="dotationUcaRech.id === editMembreDotationForm.get('dotationUCARech').value?.id">
+                          <option *ngFor="let dotationUcaRech of dotationUcaRechs" [ngValue]="dotationUcaRech" [selected]="dotationUcaRech.id === editMembreDotationForm.value.dotationUCARech?.id">
                             {{ dotationUcaRech.dotateurBase }}
                           </option>
                         </select>

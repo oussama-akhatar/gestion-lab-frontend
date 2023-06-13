@@ -4,6 +4,7 @@ export interface Responsable {
     prenom?: string;
     dateNaissance?: Date;
     email?: string;
+    password?:string;
     telephone?: string;
     typeResponsabilite?: string;
 }
