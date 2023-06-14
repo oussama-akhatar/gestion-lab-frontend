@@ -1,0 +1,57 @@
+<div class="card m-5">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h1 class="display-1 fw-medium">Welcome Admin</h1>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6">
+        <div class="card bg-primary text-white">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-content-center">
+              <h1 class="display-1 fw-bold">Etablissements</h1>
+            </div>
+            <div>
+              <h1 class="text-end mt-3 display-1 fw-bold">{{etabCount}}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card bg-danger text-white">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-content-center">
+              <h1 class="display-1 fw-bold">Laboratoires</h1>
+            </div>
+            <div>
+              <h1 class="text-end mt-3 display-1 fw-bold">{{labCount}}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 mt-3">
+        <div class="card bg-warning text-white">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-content-center">
+              <h1 class="display-1 fw-bold">Dotations UCA Rech</h1>
+            </div>
+            <div>
+              <h1 class="text-end mt-3 display-1 fw-bold">{{sommeDotationUcaRechCount | currency: 'USD'}}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 mt-3">
+        <div class="card bg-success text-white">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-content-center">
+              <h1 class="display-1 fw-bold">Membres</h1>
+            </div>
+            <div>
+              <h1 class="text-end mt-3 display-1 fw-bold">{{membreCount}}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
