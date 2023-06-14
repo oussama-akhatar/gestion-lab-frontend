@@ -17,6 +17,9 @@
           <a class="nav-link" routerLink="/dashboard-directeur">Dashboard Directeur</a>
         </li>
         <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
           <a class="nav-link" routerLink="/etablissements">Etablissements</a>
         </li>
         <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
