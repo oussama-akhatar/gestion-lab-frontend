@@ -22,6 +22,10 @@ export class ExpressionBesoinService {
     return this.http.get<ExpressionBesoin[]>(`${this.baseUrl}/all/resp/${id}`);
   }
 
+  getMembreDotation(id: number): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/memb/dota/${id}`);
+  }
+
   addExpressionBesoin(expressionBesoin: ExpressionBesoin): Observable<ExpressionBesoin> {
     return this.http.post<ExpressionBesoin>(`${this.baseUrl}/add`, expressionBesoin);
   }

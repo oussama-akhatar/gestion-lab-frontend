@@ -3,7 +3,7 @@ import {DotationUcaRech} from "./dotationUcaRech.model";
 
 export interface MembreDotationUcaRech {
   id?: number,
-  dotationMembre: string,
+  dotationMembre?: number,
   membre: Membre,
   dotationUCARech: DotationUcaRech
 }

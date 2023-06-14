@@ -14,9 +14,10 @@ export class DashboardResponsableComponent implements OnInit {
 
   sessionValue: any = '';
   email!: string;
+  msgFlag: boolean = false;
   responsables: Responsable[] = [];
   public responsable: Responsable;
-  expressionBesoins: ExpressionBesoin[] = [];
+  public expressionBesoins: ExpressionBesoin[] = [];
   addEBMontantEffectifForm: FormGroup;
 
   constructor(
@@ -36,6 +37,7 @@ export class DashboardResponsableComponent implements OnInit {
   initForm() {
     this.addEBMontantEffectifForm = this.fb.group({
       id: ['', Validators.required],
+      membre: ['', Validators.required],
       montantEffectif: [0, Validators.required]
     })
   }
@@ -43,23 +45,43 @@ export class DashboardResponsableComponent implements OnInit {
   loadEBMontantEffectifFormData(expressionBesoin: ExpressionBesoin) {
     this.addEBMontantEffectifForm.patchValue({
       id: expressionBesoin.id,
+      membre: expressionBesoin.membre,
       montantEffectif: expressionBesoin.montantEffectif,
     });
   }
 
 
   addEBMontantEffectif() {
-    let expressionBesoin: ExpressionBesoin = {
-      id: this.addEBMontantEffectifForm.value.id,
-      montantEffectif: this.addEBMontantEffectifForm.value.montantEffectif,
-    }
+    let dotaMembre: number = 0;
+    let mteffectif = this.addEBMontantEffectifForm.value.montantEffectif;
+    let membId = this.addEBMontantEffectifForm.value.membre.id;
 
-    this.expressionBesoinService.updateExpressionBesoin(expressionBesoin).subscribe(
-      (updatedExpressionBesoin: ExpressionBesoin) => {
-        this.getExpressionBesoins();
-        console.log(updatedExpressionBesoin);
+    this.expressionBesoinService.getMembreDotation(membId).subscribe((res) => {
+      dotaMembre = res;
+
+      if (mteffectif <= dotaMembre) {
+        let expressionBesoin: ExpressionBesoin = {
+          id: this.addEBMontantEffectifForm.value.id,
+          montantEffectif: mteffectif,
+        }
+        this.expressionBesoinService.updateExpressionBesoin(expressionBesoin).subscribe(
+          (updatedExpressionBesoin: ExpressionBesoin) => {
+            this.getExpressionBesoins();
+            console.log(updatedExpressionBesoin);
+          }
+        );
+        this.msgFlag = false;
+      } else {
+        this.msgFlag = true;
       }
-    );
+
+    });
+
+    // console.log(mteffectif);
+    // console.log(dotaMembre);
+    // console.log(membId);
+
+
   }
 
   getExpressionBesoins() {
@@ -72,6 +94,8 @@ export class DashboardResponsableComponent implements OnInit {
             this.expressionBesoinService.getEBsByResponsable(responsable.id).subscribe(
               (expressionBesoins: ExpressionBesoin[]) => {
                 this.expressionBesoins = expressionBesoins;
+                // console.log(this.expressionBesoins[0].membre.membreDotationUCARechs.dotationMembre);
+
                 // for (let exp of expressionBesoins) {
                 //   if (exp.validerDirecteur) {
                 //     this.expressionBesoins.push(exp);
