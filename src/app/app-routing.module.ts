@@ -14,9 +14,10 @@ import {LoginComponent} from "./components/login/login.component";
 import {DashborardMembreComponent} from "./components/dashborard-membre/dashborard-membre.component";
 import {DashboardResponsableComponent} from "./components/dashboard-responsable/dashboard-responsable.component";
 import {DashboardDirecteurComponent} from "./components/dashboard-directeur/dashboard-directeur.component";
+import {HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
-  {path: '', component: EtablissementComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'etablissements', component: EtablissementComponent},
   {path: 'laboratoires', component: LaboratoireComponent},
   {path: 'membres', component: MembreComponent},

@@ -1,6 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #dfbf9f !important;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="rounded px-2" style="font-size: 30px; font-weight: bold; color: white; background-color: saddlebrown; text-decoration: none" href="#">
+      LMS UCA
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,47 +10,53 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item" *ngIf="sessionValue == 'membre'">
-          <a class="nav-link" routerLink="/dashboard-membre">Dashboard Membre</a>
+          <a class="nav-link fw-medium" style="color: saddlebrown !important; font-size: 20px;" routerLink="/dashboard-membre">Dashboard Membre</a>
         </li>
         <li class="nav-item" *ngIf="sessionValue == 'respo'">
-          <a class="nav-link" routerLink="/dashboard-responsable">Dashboard Responsable</a>
+          <a class="nav-link fw-medium" style="color: saddlebrown !important; font-size: 20px;" routerLink="/dashboard-responsable">Dashboard Responsable</a>
         </li>
         <li class="nav-item" *ngIf="sessionValue == 'directeur'">
-          <a class="nav-link" routerLink="/dashboard-directeur">Dashboard Directeur</a>
+          <a class="nav-link fw-medium" style="color: saddlebrown !important; font-size: 20px;" routerLink="/dashboard-directeur">Dashboard Directeur</a>
         </li>
         <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
-          <a class="nav-link" routerLink="/etablissements">Etablissements</a>
+          <a class="nav-link fw-medium" style="color: saddlebrown !important; font-size: 20px;" routerLink="/home">Accueil</a>
         </li>
         <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
-          <a class="nav-link" routerLink="/laboratoires">Laboratoires</a>
+          <a class="nav-link fw-medium" style="color: saddlebrown !important; font-size: 20px;" routerLink="/etablissements">Etablissements</a>
         </li>
         <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
-          <a class="nav-link" routerLink="/membres">Membres</a>
+          <a class="nav-link fw-medium" style="color: saddlebrown !important; font-size: 20px;" routerLink="/laboratoires">Laboratoires</a>
         </li>
         <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
-          <a class="nav-link" routerLink="/responsables">Responsables</a>
+          <a class="nav-link fw-medium" style="color: saddlebrown !important; font-size: 20px;" routerLink="/membres">Membres</a>
         </li>
         <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
-          <a class="nav-link" routerLink="/projets">Projets</a>
+          <a class="nav-link fw-medium" style="color: saddlebrown !important; font-size: 20px;" routerLink="/responsables">Responsables</a>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
-          <a class="nav-link" routerLink="/projetsmembres">Projets Membres</a>
+        <li class="nav-item dropdown" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
+          <a class="nav-link dropdown-toggle fw-medium" style="color: saddlebrown !important; font-size: 20px;" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projets</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/projets">Liste Des Projets</a></li>
+            <li><a class="dropdown-item" routerLink="/projetsmembres">Liste Des Projets Membres</a></li>
+          </ul>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
-          <a class="nav-link" routerLink="/expressionbesoin">Expression Besoin</a>
+        <li class="nav-item dropdown" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
+          <a class="nav-link dropdown-toggle fw-medium" style="color: saddlebrown !important; font-size: 20px;" role="button" data-bs-toggle="dropdown" aria-expanded="false">Expression Besoin</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/expressionbesoin">Liste des Expressions de Besoin</a></li>
+            <li><a class="dropdown-item" routerLink="/typebesoin">Liste des Types de Besoin</a></li>
+          </ul>
         </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
-          <a class="nav-link" routerLink="/typebesoin">Type Besoin</a>
-        </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
-          <a class="nav-link" routerLink="/dotationucarech">Dotation Uca Rech</a>
-        </li>
-        <li class="nav-item" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
-          <a class="nav-link" routerLink="/membredotationucarech">Membre et Dotation Uca Rech</a>
+        <li class="nav-item dropdown" *ngIf="sessionValue != 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">
+          <a class="nav-link dropdown-toggle fw-medium" style="color: saddlebrown !important; font-size: 20px;" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dotations</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/dotationucarech">Liste des Dotations Uca Rech</a></li>
+            <li><a class="dropdown-item" routerLink="/membredotationucarech">Listes des Membre et Dotations Uca Rech</a></li>
+          </ul>
         </li>
       </ul>
       <div class="d-flex">
-        <a class="btn btn-success" routerLink="/login" *ngIf="sessionValue!= 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">Login <i class="bi bi-arrow-right"></i> </a>
+        <a class="btn btn-light" routerLink="/login" *ngIf="sessionValue!= 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">Login <i class="bi bi-arrow-right"></i> </a>
         <a class="btn btn-outline-dark ms-2" (click)="logout()" *ngIf="sessionValue== 'membre' || sessionValue == 'respo' || sessionValue == 'directeur'">Logout <i class="bi bi-arrow-right"></i> </a>
       </div>
     </div>

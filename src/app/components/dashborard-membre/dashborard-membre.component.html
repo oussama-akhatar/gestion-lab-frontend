@@ -47,7 +47,8 @@
             <th>ID</th>
             <th>Description</th>
             <th>Type de Besoin</th>
-            <th>Montant Aprox</th>
+            <th>Montant Aproximatif</th>
+            <th>Montant Effectif</th>
             <th>Date de demande</th>
             <th>Date de validation</th>
             <th>Valide?</th>
@@ -60,6 +61,8 @@
             <td>{{ exp.description }}</td>
             <td>{{ exp.typeBesoin.description }}</td>
             <td>{{ exp.montant | currency:'د.م' }}</td>
+            <td *ngIf="exp.montantEffectif != 0">{{ exp.montantEffectif | currency:'د.م' }}</td>
+            <td *ngIf="exp.montantEffectif == 0">-</td>
             <td *ngIf="exp.dateDemande != null">{{ exp.dateDemande | date : 'dd/MM/yyyy' }}</td>
             <td *ngIf="exp.dateDemande == null">-</td>
             <td *ngIf="exp.dateValidation != null">{{ exp.dateValidation | date : 'dd/MM/yyyy' }}</td>
