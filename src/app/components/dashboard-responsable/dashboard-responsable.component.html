@@ -66,8 +66,8 @@
                         <td>{{ expressionBesoin.id }}</td>
                         <td>{{ expressionBesoin.description }}</td>
                         <td>{{ expressionBesoin.membre.nom}} {{ expressionBesoin.membre.prenom}}</td>
-                        <td>{{expressionBesoin.montant | currency:'د.م'}}</td>
-                        <td>{{expressionBesoin.montantEffectif | currency:'د.م'}}</td>
+                        <td>{{expressionBesoin.montant | currency:'د.م '}}</td>
+                        <td>{{expressionBesoin.montantEffectif | currency:'د.م '}}</td>
                         <td *ngIf="expressionBesoin.dateDemande != null">{{expressionBesoin.dateDemande | date :
                             'dd/MM/yyyy'}}</td>
                         <td *ngIf="expressionBesoin.dateDemande == null">-</td>

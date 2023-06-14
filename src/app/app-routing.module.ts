@@ -17,6 +17,7 @@ import {DashboardDirecteurComponent} from "./components/dashboard-directeur/dash
 import {HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'etablissements', component: EtablissementComponent},
   {path: 'laboratoires', component: LaboratoireComponent},

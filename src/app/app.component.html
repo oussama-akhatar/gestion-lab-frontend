@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #dfbf9f !important;">
   <div class="container-fluid">
-    <a class="rounded px-2" style="font-size: 30px; font-weight: bold; color: white; background-color: saddlebrown; text-decoration: none" href="#">
+    <a class="rounded px-2" style="font-size: 30px; font-weight: bold; color: white; background-color: saddlebrown; text-decoration: none" routerLink="/home">
       LMS UCA
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -56,7 +56,7 @@
         </li>
       </ul>
       <div class="d-flex">
-        <a class="btn btn-outline-dark" routerLink="/login" *ngIf="sessionValue!= 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">Login <i class="bi bi-arrow-right"></i> </a>
+        <a class="btn btn-light" routerLink="/login" *ngIf="sessionValue!= 'membre' && sessionValue != 'respo' && sessionValue != 'directeur'">Login <i class="bi bi-arrow-right"></i> </a>
         <a class="btn btn-outline-dark ms-2" (click)="logout()" *ngIf="sessionValue== 'membre' || sessionValue == 'respo' || sessionValue == 'directeur'">Logout <i class="bi bi-arrow-right"></i> </a>
       </div>
     </div>
