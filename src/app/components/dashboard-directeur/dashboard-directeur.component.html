@@ -63,7 +63,7 @@
                 <td>{{exp.id}}</td>
                 <td>{{exp.description}}</td>
                 <td>{{exp.typeBesoin.description}}</td>
-                <td>{{exp.montant | currency:'د.م '}}</td>
+                <td>{{exp.montant | currency:'د.م'}}</td>
                 <td *ngIf="exp.dateDemande != null">{{ exp.dateDemande | date : 'dd/MM/yyyy' }}</td>
                 <td *ngIf="exp.dateDemande == null">-</td>
                 <td *ngIf="exp.dateValidation != null">{{ exp.dateValidation | date : 'dd/MM/yyyy' }}</td>
