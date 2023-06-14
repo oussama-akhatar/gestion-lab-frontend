@@ -23,7 +23,7 @@
           <td>{{ projet.intitule }}</td>
           <td>{{ projet.dateDebut | date : 'dd/MM/yyyy' }}</td>
           <td>{{ projet.dateFin | date : 'dd/MM/yyyy' }}</td>
-          <td>{{ projet.budget | currency: 'USD' }}</td>
+          <td>{{ projet.budget | currency:'د.م' }}</td>
           <td>
             <a class="text-success h5" href="#{{projet.id}}" data-bs-toggle="modal" (click)="loadProjetFormData(projet)" ><i class="bi bi-pen"></i></a>
             <div class="modal fade" id="{{projet.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

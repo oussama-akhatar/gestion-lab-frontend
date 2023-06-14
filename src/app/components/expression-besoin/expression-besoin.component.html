@@ -28,11 +28,11 @@
           <td>{{ expressionBesoin.membre.nom}} {{ expressionBesoin.membre.prenom}}</td>
           <td *ngIf="expressionBesoin.responsable != null">{{ expressionBesoin?.responsable?.nom + " " + expressionBesoin?.responsable?.prenom}}</td>
           <td *ngIf="expressionBesoin.responsable == null">-</td>
-          <td>{{expressionBesoin.montant | currency:'USD'}}</td>
-          <td>{{expressionBesoin.montantEffectif | currency:'USD'}}</td>
-          <td *ngIf="expressionBesoin.dateDemande != null">{{expressionBesoin.dateDemande}}</td>
+          <td>{{expressionBesoin.montant | currency:'د.م'}}</td>
+          <td>{{expressionBesoin.montantEffectif | currency:'د.م' }}</td>
+          <td *ngIf="expressionBesoin.dateDemande != null">{{expressionBesoin.dateDemande | date : 'dd/MM/yyyy' }}</td>
           <td *ngIf="expressionBesoin.dateDemande == null">-</td>
-          <td *ngIf="expressionBesoin.dateValidation != null">{{expressionBesoin.dateValidation}}</td>
+          <td *ngIf="expressionBesoin.dateValidation != null">{{expressionBesoin.dateValidation | date : 'dd/MM/yyyy' }}</td>
           <td *ngIf="expressionBesoin.dateValidation == null">-</td>
           <td>{{ expressionBesoin.typeBesoin.description }}</td>
           <td class="ps-4">
